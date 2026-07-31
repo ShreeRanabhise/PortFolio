@@ -42,23 +42,23 @@ export function Navbar() {
         {/* Brand / Logo */}
         <Link
           href="/"
-          className="group flex flex-col text-stone-900 dark:text-stone-100 font-medium tracking-tight hover:opacity-90 transition-opacity"
+          className="group flex flex-col text-stone-900 dark:text-stone-100 font-medium tracking-tight hover:opacity-90 transition-opacity shrink-0"
         >
-          <span className="font-bold text-base sm:text-lg leading-none text-stone-900 dark:text-stone-100 tracking-tight">
+          <span className="font-bold text-base sm:text-lg leading-none text-stone-900 dark:text-stone-100 tracking-tight whitespace-nowrap">
             Shree Ranabhise
           </span>
-          <span className="text-[11px] text-stone-500 dark:text-stone-400 font-medium tracking-wide pt-0.5">
+          <span className="text-[11px] text-stone-500 dark:text-stone-400 font-medium tracking-wide pt-0.5 whitespace-nowrap">
             {personalInfo.role}
           </span>
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-stone-200/40 dark:bg-stone-800/40 p-1.5 rounded-full border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-xs">
+        <nav className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-stone-200/40 dark:bg-stone-800/40 p-1.5 rounded-full border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-xs shrink min-w-0">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="px-3.5 py-1.5 text-xs font-medium text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 rounded-full hover:bg-stone-200/60 dark:hover:bg-stone-700/50 transition-all duration-200"
+              className="px-2.5 lg:px-3.5 py-1.5 text-[11px] lg:text-xs font-medium text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 rounded-full hover:bg-stone-200/60 dark:hover:bg-stone-700/50 transition-all duration-200 whitespace-nowrap"
             >
               {link.name}
             </Link>
@@ -66,12 +66,12 @@ export function Navbar() {
         </nav>
 
         {/* Right CTA Actions */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
           <ThemeToggle />
           <a
             href="/Shree_Ranabhise_Resume.pdf"
             download="Shree_Ranabhise_Resume.pdf"
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-sky-950 dark:text-sky-200 bg-sky-100/90 hover:bg-sky-200/90 dark:bg-sky-950/60 dark:hover:bg-sky-900/60 border border-sky-200/80 dark:border-sky-800/60 rounded-full transition-all duration-200 shadow-2xs hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center gap-1.5 px-3.5 lg:px-4 py-2 text-xs font-semibold text-sky-950 dark:text-sky-200 bg-sky-100/90 hover:bg-sky-200/90 dark:bg-sky-950/60 dark:hover:bg-sky-900/60 border border-sky-200/80 dark:border-sky-800/60 rounded-full transition-all duration-200 shadow-2xs hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
           >
             <Download className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
             <span>Resume</span>

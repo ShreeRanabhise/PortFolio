@@ -17,14 +17,14 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* Main Hero Text (7 cols) */}
+          {/* Main Hero Text (7 cols on md+) */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="lg:col-span-7 flex flex-col items-start gap-6"
+            className="md:col-span-7 flex flex-col items-start gap-5 lg:gap-6"
           >
             {/* Status chip */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-stone-200/50 dark:bg-stone-800/40 border border-stone-300/40 dark:border-white/[0.08] text-xs sm:text-sm font-medium text-stone-700 dark:text-stone-300 shadow-2xs backdrop-blur-xs">
@@ -36,20 +36,20 @@ export function Hero() {
             </div>
 
             {/* Greeting & Title */}
-            <div className="space-y-2.5">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 dark:text-stone-100 leading-[1.15]">
+            <div className="space-y-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 dark:text-stone-100 leading-[1.15]">
                 Hi, I’m{' '}
                 <span className="bg-gradient-to-r from-sky-600 via-purple-600 to-emerald-600 dark:from-sky-400 dark:via-purple-400 dark:to-emerald-400 bg-clip-text text-transparent">
                   Shree Ranabhise
                 </span>
               </h1>
-              <p className="text-lg sm:text-2xl font-semibold tracking-tight text-stone-700 dark:text-stone-300">
+              <p className="text-lg sm:text-xl md:text-2xl font-semibold tracking-tight text-stone-700 dark:text-stone-300">
                 {personalInfo.role}
               </p>
             </div>
 
             {/* Outcome statement */}
-            <p className="text-sm sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-normal max-w-2xl">
+            <p className="text-sm sm:text-base md:text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-normal max-w-2xl">
               {personalInfo.outcomesStatement}
             </p>
 
@@ -67,7 +67,7 @@ export function Hero() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-1 sm:pt-2">
               <Link
                 href="#projects"
                 className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 rounded-2xl shadow-sm transition-all duration-200 active:scale-[0.98]"
@@ -86,12 +86,12 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Profile Card preserving uploaded photo 3:4 aspect ratio (5 cols) */}
+          {/* Profile Card preserving uploaded photo 3:4 aspect ratio (5 cols on md+) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-5 flex justify-center"
+            className="md:col-span-5 flex justify-center md:justify-end"
           >
             <div className="relative w-full max-w-sm p-4 rounded-3xl bg-white/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-xs flex flex-col gap-4">
               
