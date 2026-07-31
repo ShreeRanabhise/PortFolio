@@ -13,7 +13,7 @@ export default function Home() {
     <div className="relative min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-sky-200 dark:selection:bg-sky-900 selection:text-sky-900 dark:selection:text-sky-100">
       <Navbar />
 
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow">
         <Hero />
         <About />
         <Skills />

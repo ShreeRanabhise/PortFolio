@@ -47,13 +47,13 @@ export const certificatesData: Certificate[] = [
     title: 'Web Development',
     issuer: 'Bolt IoT',
     period: 'Sep 2022 - Nov 2022',
-    skills: ['PHP', 'HTML', 'CSS', 'JavaScript', 'React', 'Node JS', 'SQL', 'SEO Optimization']
+    skills: ['PHP', 'HTML', 'CSS', 'JavaScript', 'React', 'Node.JS', 'SQL', 'TypeScript', 'Express']
   },
   {
     title: 'Data Analytics',
     issuer: 'Anudip Foundation',
     period: 'Aug 2024 - Feb 2025',
-    skills: ['MS Excel', 'Power BI', 'SQL', 'Python', 'Soft Skills']
+    skills: ['MS Excel', 'Power BI', 'SQL', 'Python', 'Soft Skills', 'Data Cleaning', 'Sorting', 'SEO']
   }
 ];
 

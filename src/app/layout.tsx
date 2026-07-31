@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
@@ -9,6 +9,15 @@ const inter = Inter({
   variable: '--font-sans',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#fcfbf9' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f1218' },
+  ],
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://shreeranabhise.vercel.app'),
@@ -105,6 +114,17 @@ const jsonLdPerson = {
   ],
 };
 
+const jsonLdWebSite = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Shree Ranabhise Portfolio',
+  url: 'https://shreeranabhise.vercel.app',
+  author: {
+    '@type': 'Person',
+    name: 'Shree Ranabhise',
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -117,8 +137,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdPerson) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
+        />
       </head>
       <body className="font-sans antialiased bg-[#fcfbf9] text-[#27272a] dark:bg-[#0f1218] dark:text-[#f4f4f5] transition-colors duration-300">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-sky-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
