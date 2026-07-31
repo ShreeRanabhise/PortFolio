@@ -261,7 +261,7 @@ export const timelineData: TimelineEntry[] = [
     type: 'experience',
     organization: 'IGT Solutions Private Limited',
     role: 'Process Associate',
-    period: 'Dec 2024 - Jan 2026',
+    period: 'Dec 2023 - Jan 2026',
     location: 'Pune, MH, India',
     summary: 'Executed structured operations, data validation, client communication, and technology workflows at IGT Solutions Private Limited.',
     keyAchievements: [
