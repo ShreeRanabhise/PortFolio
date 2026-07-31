@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-main: #faf9f6;
+    --bg-surface: #ffffff;
+    --bg-subtle: #f4f2ed;
+    --border-subtle: rgba(226, 222, 212, 0.85);
+    --border-strong: #d8d4c9;
+    --text-primary: #18181b;
+    --text-secondary: #3f3f46;
+    --text-muted: #71717a;
+    
+    /* Accents */
+    --mist-bg: #e0f2fe;
+    --mist-border: #bae6fd;
+    --mist-text: #0284c7;
+
+    --lavender-bg: #f3e8ff;
+    --lavender-border: #e9d5ff;
+    --lavender-text: #7e22ce;
+
+    --sage-bg: #dcfce7;
+    --sage-border: #bbf7d0;
+    --sage-text: #15803d;
+
+    --peach-bg: #ffedd5;
+    --peach-border: #fed7aa;
+    --peach-text: #c2410c;
+  }
+
+  .dark {
+    --bg-main: #0a0d14;
+    --bg-surface: #121620;
+    --bg-subtle: #1a1f2c;
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-strong: rgba(255, 255, 255, 0.18);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+
+    --mist-bg: rgba(56, 189, 248, 0.15);
+    --mist-border: rgba(56, 189, 248, 0.3);
+    --mist-text: #38bdf8;
+
+    --lavender-bg: rgba(167, 139, 250, 0.15);
+    --lavender-border: rgba(167, 139, 250, 0.3);
+    --lavender-text: #c084fc;
+
+    --sage-bg: rgba(74, 222, 128, 0.15);
+    --sage-border: rgba(74, 222, 128, 0.3);
+    --sage-text: #4ade80;
+
+    --peach-bg: rgba(251, 146, 60, 0.15);
+    --peach-border: rgba(251, 146, 60, 0.3);
+    --peach-text: #fb923c;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
