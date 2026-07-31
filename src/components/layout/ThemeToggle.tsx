@@ -22,12 +22,12 @@ export function ThemeToggle() {
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle Color Theme"
-      className="relative p-2 rounded-full text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 bg-stone-100 dark:bg-stone-800/70 border border-stone-200/70 dark:border-stone-700/60 hover:bg-stone-200/60 dark:hover:bg-stone-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-500/50"
+      className="group relative p-2 rounded-full text-stone-700 hover:text-stone-950 dark:text-stone-300 dark:hover:text-stone-100 bg-stone-100 dark:bg-stone-800/70 border border-stone-300/60 dark:border-stone-700/60 hover:bg-stone-200/80 dark:hover:bg-stone-700/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-500/50"
     >
       {theme === 'dark' ? (
-        <Sun className="w-4 h-4 text-amber-300 transition-transform duration-200 hover:rotate-45" />
+        <Sun className="w-4 h-4 text-amber-300 group-hover:rotate-45 group-hover:scale-110 transition-transform duration-300" />
       ) : (
-        <Moon className="w-4 h-4 text-sky-700 transition-transform duration-200 hover:-rotate-12" />
+        <Moon className="w-4 h-4 text-sky-700 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-300" />
       )}
     </button>
   );

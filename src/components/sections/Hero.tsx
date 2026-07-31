@@ -82,17 +82,17 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-1 sm:pt-2">
               <Link
                 href="#projects"
-                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 rounded-2xl shadow-sm transition-all duration-200 active:scale-[0.98]"
+                className="group w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 rounded-2xl shadow-sm transition-all duration-200 active:scale-[0.98]"
               >
                 <span>View projects</span>
-                <ArrowDownRight className="w-4 h-4" />
+                <ArrowDownRight className="w-4 h-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-transform duration-200" />
               </Link>
 
               <Link
                 href="#contact"
-                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-stone-700 dark:text-stone-200 bg-stone-200/50 dark:bg-stone-800/50 hover:bg-stone-200/80 dark:hover:bg-stone-700/80 border border-stone-300/40 dark:border-white/[0.08] rounded-2xl transition-all duration-200 active:scale-[0.98]"
+                className="group w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold text-stone-900 dark:text-stone-100 bg-stone-200/60 dark:bg-stone-800/60 hover:bg-stone-200/90 dark:hover:bg-stone-700/90 border border-stone-300/50 dark:border-white/[0.1] rounded-2xl transition-all duration-200 active:scale-[0.98]"
               >
-                <Mail className="w-4 h-4 text-stone-500" />
+                <Mail className="w-4 h-4 text-stone-600 dark:text-stone-300 group-hover:-rotate-12 group-hover:scale-110 transition-transform duration-200" />
                 <span>Contact me</span>
               </Link>
             </div>
