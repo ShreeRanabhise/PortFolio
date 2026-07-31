@@ -4,63 +4,65 @@
 
 @layer base {
   :root {
-    --bg-main: #faf9f6;
+    --bg-main: #faf9f5;
     --bg-surface: #ffffff;
-    --bg-subtle: #f4f2ed;
-    --border-subtle: rgba(226, 222, 212, 0.85);
-    --border-strong: #d8d4c9;
+    --bg-subtle: #f4f1ea;
+    --border-subtle: rgba(226, 220, 208, 0.55);
+    --border-strong: rgba(210, 202, 188, 0.85);
     --text-primary: #18181b;
     --text-secondary: #3f3f46;
     --text-muted: #71717a;
-    
-    /* Accents */
-    --mist-bg: #e0f2fe;
-    --mist-border: #bae6fd;
+
+    /* Restrained Accents */
+    --mist-bg: rgba(224, 242, 254, 0.6);
+    --mist-border: rgba(186, 230, 253, 0.8);
     --mist-text: #0284c7;
 
-    --lavender-bg: #f3e8ff;
-    --lavender-border: #e9d5ff;
+    --lavender-bg: rgba(243, 232, 255, 0.6);
+    --lavender-border: rgba(233, 213, 255, 0.8);
     --lavender-text: #7e22ce;
 
-    --sage-bg: #dcfce7;
-    --sage-border: #bbf7d0;
+    --sage-bg: rgba(220, 252, 231, 0.6);
+    --sage-border: rgba(187, 247, 208, 0.8);
     --sage-text: #15803d;
 
-    --peach-bg: #ffedd5;
-    --peach-border: #fed7aa;
+    --peach-bg: rgba(255, 237, 213, 0.6);
+    --peach-border: rgba(254, 215, 170, 0.8);
     --peach-text: #c2410c;
   }
 
   .dark {
-    --bg-main: #0a0d14;
-    --bg-surface: #121620;
-    --bg-subtle: #1a1f2c;
-    --border-subtle: rgba(255, 255, 255, 0.1);
-    --border-strong: rgba(255, 255, 255, 0.18);
+    --bg-main: #0c0f16;
+    --bg-surface: #141824;
+    --bg-subtle: #1c2232;
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.14);
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
 
-    --mist-bg: rgba(56, 189, 248, 0.15);
-    --mist-border: rgba(56, 189, 248, 0.3);
+    --mist-bg: rgba(56, 189, 248, 0.12);
+    --mist-border: rgba(56, 189, 248, 0.25);
     --mist-text: #38bdf8;
 
-    --lavender-bg: rgba(167, 139, 250, 0.15);
-    --lavender-border: rgba(167, 139, 250, 0.3);
+    --lavender-bg: rgba(167, 139, 250, 0.12);
+    --lavender-border: rgba(167, 139, 250, 0.25);
     --lavender-text: #c084fc;
 
-    --sage-bg: rgba(74, 222, 128, 0.15);
-    --sage-border: rgba(74, 222, 128, 0.3);
+    --sage-bg: rgba(74, 222, 128, 0.12);
+    --sage-border: rgba(74, 222, 128, 0.25);
     --sage-text: #4ade80;
 
-    --peach-bg: rgba(251, 146, 60, 0.15);
-    --peach-border: rgba(251, 146, 60, 0.3);
+    --peach-bg: rgba(251, 146, 60, 0.12);
+    --peach-border: rgba(251, 146, 60, 0.25);
     --peach-text: #fb923c;
   }
 }
 
 html {
   scroll-behavior: smooth;
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 body {
@@ -69,6 +71,24 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   transition: background-color 0.3s ease, color 0.3s ease;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+/* Subtle imperceptible noise overlay */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+
+.dark :focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
 }
 
 /* Custom scrollbar */
@@ -100,3 +120,4 @@ body {
     scroll-behavior: auto !important;
   }
 }
+

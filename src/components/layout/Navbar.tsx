@@ -34,7 +34,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#fcfbf9]/85 dark:bg-[#0f1218]/85 backdrop-blur-md border-b border-stone-200/50 dark:border-stone-800/60 shadow-sm py-3'
+          ? 'bg-[#faf9f5]/85 dark:bg-[#0c0f16]/85 backdrop-blur-md border-b border-stone-200/40 dark:border-white/[0.07] shadow-xs py-3.5'
           : 'bg-transparent py-5'
       }`}
     >
@@ -44,7 +44,7 @@ export function Navbar() {
           href="/"
           className="group flex flex-col text-stone-900 dark:text-stone-100 font-medium tracking-tight hover:opacity-90 transition-opacity"
         >
-          <span className="font-bold text-base sm:text-lg leading-none text-stone-900 dark:text-stone-100">
+          <span className="font-bold text-base sm:text-lg leading-none text-stone-900 dark:text-stone-100 tracking-tight">
             Shree Ranabhise
           </span>
           <span className="text-[11px] text-stone-500 dark:text-stone-400 font-medium tracking-wide pt-0.5">
@@ -53,12 +53,12 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-stone-100/70 dark:bg-stone-800/50 p-1.5 rounded-full border border-stone-200/60 dark:border-stone-700/50 backdrop-blur-xs">
+        <nav className="hidden md:flex items-center gap-1 bg-stone-200/40 dark:bg-stone-800/40 p-1.5 rounded-full border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-xs">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="px-3.5 py-1.5 text-xs font-medium text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 rounded-full hover:bg-stone-200/50 dark:hover:bg-stone-700/60 transition-colors"
+              className="px-3.5 py-1.5 text-xs font-medium text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 rounded-full hover:bg-stone-200/60 dark:hover:bg-stone-700/50 transition-all duration-200"
             >
               {link.name}
             </Link>
@@ -71,7 +71,7 @@ export function Navbar() {
           <a
             href="/Shree_Ranabhise_Resume.pdf"
             download="Shree_Ranabhise_Resume.pdf"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-sky-900 dark:text-sky-200 bg-sky-100/90 hover:bg-sky-200 dark:bg-sky-950/70 dark:hover:bg-sky-900/70 border border-sky-200 dark:border-sky-800/80 rounded-full transition-all shadow-2xs hover:scale-105 active:scale-95"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-sky-950 dark:text-sky-200 bg-sky-100/90 hover:bg-sky-200/90 dark:bg-sky-950/60 dark:hover:bg-sky-900/60 border border-sky-200/80 dark:border-sky-800/60 rounded-full transition-all duration-200 shadow-2xs hover:-translate-y-0.5 active:translate-y-0"
           >
             <Download className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
             <span>Resume</span>
@@ -85,7 +85,7 @@ export function Navbar() {
             download="Shree_Ranabhise_Resume.pdf"
             aria-label="Download Resume"
             title="Download Resume"
-            className="p-2 rounded-xl text-sky-700 dark:text-sky-300 bg-sky-100/90 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800 flex items-center justify-center"
+            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-sky-700 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800/70 flex items-center justify-center active:scale-95 transition-transform"
           >
             <Download className="w-4.5 h-4.5" />
           </a>
@@ -93,7 +93,7 @@ export function Navbar() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-            className="p-2 rounded-xl text-stone-700 dark:text-stone-300 bg-stone-100 dark:bg-stone-800/80 border border-stone-200 dark:border-stone-700 hover:bg-stone-200/60 dark:hover:bg-stone-700"
+            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-stone-700 dark:text-stone-300 bg-stone-100 dark:bg-stone-800/70 border border-stone-200 dark:border-stone-700/70 hover:bg-stone-200/60 dark:hover:bg-stone-700 flex items-center justify-center active:scale-95 transition-transform"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -102,23 +102,23 @@ export function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#fcfbf9]/95 dark:bg-[#0f1218]/95 backdrop-blur-lg border-b border-stone-200 dark:border-stone-800 p-5 shadow-lg animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col gap-2">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-[#faf9f5]/95 dark:bg-[#0c0f16]/95 backdrop-blur-lg border-b border-stone-200/80 dark:border-white/[0.08] p-4 shadow-lg animate-in slide-in-from-top-2 duration-200">
+          <nav className="flex flex-col gap-1.5">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="px-4 py-2.5 text-sm font-medium text-stone-700 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-800/60 rounded-xl transition-colors"
+                className="min-h-[44px] px-4 py-3 text-base font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-200/40 dark:hover:bg-stone-800/50 active:bg-stone-200/60 dark:active:bg-stone-800/80 rounded-xl transition-colors flex items-center"
               >
                 {link.name}
               </Link>
             ))}
-            <div className="pt-3 border-t border-stone-200/60 dark:border-stone-800 flex items-center justify-center">
+            <div className="pt-3 border-t border-stone-200/60 dark:border-white/[0.08] flex items-center justify-center">
               <a
                 href="/Shree_Ranabhise_Resume.pdf"
                 download="Shree_Ranabhise_Resume.pdf"
-                className="w-full text-center py-2.5 px-4 text-xs font-semibold text-sky-900 dark:text-sky-200 bg-sky-100 dark:bg-sky-950 border border-sky-200 dark:border-sky-800 rounded-xl flex items-center justify-center gap-2"
+                className="w-full min-h-[44px] py-3 px-4 text-sm font-semibold text-sky-950 dark:text-sky-200 bg-sky-100 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800/80 rounded-xl flex items-center justify-center gap-2 active:scale-[0.99] transition-transform"
               >
                 <Download className="w-4 h-4 text-sky-600 dark:text-sky-400" />
                 <span>Download Resume</span>

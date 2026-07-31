@@ -37,29 +37,29 @@ export function Hero() {
 
             {/* Greeting & Title */}
             <div className="space-y-2.5">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 dark:text-stone-100 leading-[1.15]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-stone-900 dark:text-stone-100 leading-[1.15]">
                 Hi, I’m{' '}
                 <span className="bg-gradient-to-r from-sky-600 via-purple-600 to-emerald-600 dark:from-sky-400 dark:via-purple-400 dark:to-emerald-400 bg-clip-text text-transparent">
                   Shree Ranabhise
                 </span>
               </h1>
-              <p className="text-xl sm:text-2xl font-semibold tracking-tight text-stone-700 dark:text-stone-300">
+              <p className="text-lg sm:text-2xl font-semibold tracking-tight text-stone-700 dark:text-stone-300">
                 {personalInfo.role}
               </p>
             </div>
 
             {/* Outcome statement */}
-            <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-normal max-w-2xl">
+            <p className="text-sm sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-normal max-w-2xl">
               {personalInfo.outcomesStatement}
             </p>
 
             {/* Quick location tag */}
-            <div className="flex items-center gap-4 text-xs sm:text-sm font-medium text-stone-500 dark:text-stone-400">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm font-medium text-stone-500 dark:text-stone-400">
               <span className="flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-stone-400" />
                 {personalInfo.location}
               </span>
-              <span className="w-1 h-1 rounded-full bg-stone-300 dark:bg-stone-700"></span>
+              <span className="hidden sm:inline-block w-1 h-1 rounded-full bg-stone-300 dark:bg-stone-700"></span>
               <span className="flex items-center gap-1.5">
                 <Code2 className="w-3.5 h-3.5 text-stone-400" />
                 Frontend, Backend & API
@@ -67,10 +67,10 @@ export function Hero() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto pt-2">
               <Link
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 rounded-2xl shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 rounded-2xl shadow-sm transition-all duration-200 active:scale-[0.98]"
               >
                 <span>View projects</span>
                 <ArrowDownRight className="w-4 h-4" />
@@ -78,7 +78,7 @@ export function Hero() {
 
               <Link
                 href="#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-stone-700 dark:text-stone-200 bg-stone-200/50 dark:bg-stone-800/50 hover:bg-stone-200/80 dark:hover:bg-stone-700/80 border border-stone-300/40 dark:border-white/[0.08] rounded-2xl transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-stone-700 dark:text-stone-200 bg-stone-200/50 dark:bg-stone-800/50 hover:bg-stone-200/80 dark:hover:bg-stone-700/80 border border-stone-300/40 dark:border-white/[0.08] rounded-2xl transition-all duration-200 active:scale-[0.98]"
               >
                 <Mail className="w-4 h-4 text-stone-500" />
                 <span>Contact me</span>

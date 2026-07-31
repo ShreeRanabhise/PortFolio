@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { SectionHeader } from '@/components/ui/SectionHeader';
 import { personalInfo } from '@/data/portfolioData';
-import { Mail, Phone, Github, Linkedin, Send, CheckCircle2, AlertCircle, MapPin, Copy, Check } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, Send, CheckCircle2, AlertCircle, Copy, Check } from 'lucide-react';
 
 export function ContactSection() {
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -50,7 +50,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-stone-50/50 dark:bg-stone-900/30">
+    <section id="contact" className="py-20 bg-stone-100/30 dark:bg-stone-900/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Get In Touch"
@@ -61,10 +61,16 @@ export function ContactSection() {
 
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Contact Details & Links (6 cols) */}
-          <div className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 shadow-2xs space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-white/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-2xs space-y-6"
+          >
             <div className="space-y-6">
-              <div className="flex items-center justify-between border-b border-stone-100 dark:border-stone-800 pb-4">
-                <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">
+              <div className="flex items-center justify-between border-b border-stone-200/40 dark:border-white/[0.06] pb-4">
+                <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100 tracking-tight">
                   Direct Channels
                 </h3>
                 <span className="text-xs font-mono text-stone-400 dark:text-stone-500">
@@ -72,12 +78,12 @@ export function ContactSection() {
                 </span>
               </div>
 
-              <div className="space-y-3.5">
+              <div className="space-y-3">
                 {/* Phone Channel */}
-                <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-stone-50/80 dark:bg-stone-800/50 border border-stone-200/60 dark:border-stone-700/60 text-stone-800 dark:text-stone-200 hover:border-emerald-300 dark:hover:border-emerald-700 transition-all group">
-                  <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-3.5 flex-1 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
-                      <Phone className="w-5 h-5" />
+                <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-stone-100/50 dark:bg-stone-800/40 border border-stone-200/40 dark:border-white/[0.06] text-stone-800 dark:text-stone-200 hover:border-emerald-300/80 dark:hover:border-emerald-800/60 transition-all duration-200 group">
+                  <a href={`tel:${personalInfo.phone}`} className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-emerald-100/80 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0">
+                      <Phone className="w-4.5 h-4.5" />
                     </div>
                     <div className="min-w-0">
                       <span className="block text-[11px] text-stone-400 dark:text-stone-500 font-medium">Call / WhatsApp</span>
@@ -87,11 +93,11 @@ export function ContactSection() {
                   <button
                     onClick={(e) => handleCopy('phone', personalInfo.phone, e)}
                     title="Quick Copy Phone Number"
-                    className="px-2.5 py-1.5 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1.5 text-xs font-medium shadow-2xs"
+                    className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1 text-xs font-medium shadow-2xs"
                   >
                     {copiedId === 'phone' ? (
                       <>
-                        <Check className="w-4 h-4 text-emerald-500" />
+                        <Check className="w-3.5 h-3.5 text-emerald-500" />
                         <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">Copied</span>
                       </>
                     ) : (
@@ -104,10 +110,10 @@ export function ContactSection() {
                 </div>
 
                 {/* Email Channel */}
-                <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-stone-50/80 dark:bg-stone-800/50 border border-stone-200/60 dark:border-stone-700/60 text-stone-800 dark:text-stone-200 hover:border-sky-300 dark:hover:border-sky-700 transition-all group">
-                  <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3.5 flex-1 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-300 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
-                      <Mail className="w-5 h-5" />
+                <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-stone-100/50 dark:bg-stone-800/40 border border-stone-200/40 dark:border-white/[0.06] text-stone-800 dark:text-stone-200 hover:border-sky-300/80 dark:hover:border-sky-800/60 transition-all duration-200 group">
+                  <a href={`mailto:${personalInfo.email}`} className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-sky-100/80 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300 flex items-center justify-center shrink-0">
+                      <Mail className="w-4.5 h-4.5" />
                     </div>
                     <div className="min-w-0">
                       <span className="block text-[11px] text-stone-400 dark:text-stone-500 font-medium">Email Address</span>
@@ -117,11 +123,11 @@ export function ContactSection() {
                   <button
                     onClick={(e) => handleCopy('email', personalInfo.email, e)}
                     title="Quick Copy Email Address"
-                    className="px-2.5 py-1.5 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1.5 text-xs font-medium shadow-2xs"
+                    className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1 text-xs font-medium shadow-2xs"
                   >
                     {copiedId === 'email' ? (
                       <>
-                        <Check className="w-4 h-4 text-sky-500" />
+                        <Check className="w-3.5 h-3.5 text-sky-500" />
                         <span className="text-[11px] text-sky-600 dark:text-sky-400 font-semibold">Copied</span>
                       </>
                     ) : (
@@ -134,10 +140,10 @@ export function ContactSection() {
                 </div>
 
                 {/* LinkedIn Channel */}
-                <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-stone-50/80 dark:bg-stone-800/50 border border-stone-200/60 dark:border-stone-700/60 text-stone-800 dark:text-stone-200 hover:border-blue-300 dark:hover:border-blue-700 transition-all group">
-                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3.5 flex-1 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
-                      <Linkedin className="w-5 h-5" />
+                <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-stone-100/50 dark:bg-stone-800/40 border border-stone-200/40 dark:border-white/[0.06] text-stone-800 dark:text-stone-200 hover:border-blue-300/80 dark:hover:border-blue-800/60 transition-all duration-200 group">
+                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-blue-100/80 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 flex items-center justify-center shrink-0">
+                      <Linkedin className="w-4.5 h-4.5" />
                     </div>
                     <div className="min-w-0">
                       <span className="block text-[11px] text-stone-400 dark:text-stone-500 font-medium">LinkedIn Profile</span>
@@ -147,11 +153,11 @@ export function ContactSection() {
                   <button
                     onClick={(e) => handleCopy('linkedin', personalInfo.linkedin, e)}
                     title="Quick Copy LinkedIn URL"
-                    className="px-2.5 py-1.5 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1.5 text-xs font-medium shadow-2xs"
+                    className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1 text-xs font-medium shadow-2xs"
                   >
                     {copiedId === 'linkedin' ? (
                       <>
-                        <Check className="w-4 h-4 text-blue-500" />
+                        <Check className="w-3.5 h-3.5 text-blue-500" />
                         <span className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold">Copied</span>
                       </>
                     ) : (
@@ -164,10 +170,10 @@ export function ContactSection() {
                 </div>
 
                 {/* GitHub Channel */}
-                <div className="flex items-center justify-between gap-3 p-4 rounded-2xl bg-stone-50/80 dark:bg-stone-800/50 border border-stone-200/60 dark:border-stone-700/60 text-stone-800 dark:text-stone-200 hover:border-purple-300 dark:hover:border-purple-700 transition-all group">
-                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3.5 flex-1 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
-                      <Github className="w-5 h-5" />
+                <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl bg-stone-100/50 dark:bg-stone-800/40 border border-stone-200/40 dark:border-white/[0.06] text-stone-800 dark:text-stone-200 hover:border-purple-300/80 dark:hover:border-purple-800/60 transition-all duration-200 group">
+                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-9 h-9 rounded-xl bg-purple-100/80 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
+                      <Github className="w-4.5 h-4.5" />
                     </div>
                     <div className="min-w-0">
                       <span className="block text-[11px] text-stone-400 dark:text-stone-500 font-medium">GitHub Repositories</span>
@@ -177,11 +183,11 @@ export function ContactSection() {
                   <button
                     onClick={(e) => handleCopy('github', personalInfo.github, e)}
                     title="Quick Copy GitHub URL"
-                    className="px-2.5 py-1.5 rounded-xl bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1.5 text-xs font-medium shadow-2xs"
+                    className="px-2.5 py-1.5 rounded-xl bg-white/80 dark:bg-stone-800/80 border border-stone-200/60 dark:border-stone-700/60 text-stone-500 hover:text-stone-900 dark:hover:text-stone-100 transition-colors shrink-0 flex items-center gap-1 text-xs font-medium shadow-2xs"
                   >
                     {copiedId === 'github' ? (
                       <>
-                        <Check className="w-4 h-4 text-purple-500" />
+                        <Check className="w-3.5 h-3.5 text-purple-500" />
                         <span className="text-[11px] text-purple-600 dark:text-purple-400 font-semibold">Copied</span>
                       </>
                     ) : (
@@ -195,18 +201,24 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-sky-50 to-purple-50 dark:from-sky-950/40 dark:to-purple-950/30 border border-sky-200/60 dark:border-sky-800/50 flex items-center gap-3 mt-6">
-              <Send className="w-5 h-5 text-sky-600 dark:text-sky-400 shrink-0" />
+            <div className="p-4 rounded-2xl bg-sky-500/5 dark:bg-sky-500/10 border border-sky-200/50 dark:border-sky-800/40 flex items-center gap-3 mt-6">
+              <Send className="w-4.5 h-4.5 text-sky-600 dark:text-sky-400 shrink-0" />
               <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
                 Aiming to bring value to innovative Cloud Architecture & Web Engineering teams with clean code, dedication, and fast learning.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Accessible Contact Form (6 cols) */}
-          <div className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 shadow-2xs">
-            <div className="flex items-center justify-between border-b border-stone-100 dark:border-stone-800 pb-4 mb-6">
-              <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="lg:col-span-6 flex flex-col justify-between p-6 sm:p-8 rounded-3xl bg-white/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-2xs"
+          >
+            <div className="flex items-center justify-between border-b border-stone-200/40 dark:border-white/[0.06] pb-4 mb-6">
+              <h3 className="text-lg font-bold text-stone-900 dark:text-stone-100 tracking-tight">
                 Send a Direct Message
               </h3>
               <span className="text-xs font-mono text-stone-400 dark:text-stone-500">
@@ -218,13 +230,13 @@ export function ContactSection() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="p-8 rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-center space-y-3 my-auto"
+                className="p-8 rounded-2xl bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/60 dark:border-emerald-800/60 text-center space-y-3 my-auto"
               >
                 <CheckCircle2 className="w-10 h-10 text-emerald-600 dark:text-emerald-400 mx-auto" />
                 <h4 className="text-lg font-bold text-emerald-900 dark:text-emerald-200">
                   Message Sent Successfully!
                 </h4>
-                <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-emerald-700 dark:text-emerald-300 leading-relaxed font-normal">
                   Thank you for reaching out. Shree will review your message and reply promptly.
                 </p>
                 <button
@@ -251,10 +263,10 @@ export function ContactSection() {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Alex Smith"
-                        className={`w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border ${
+                        className={`w-full px-4 py-3 text-base sm:text-sm rounded-xl bg-stone-100/60 dark:bg-stone-800/50 text-stone-900 dark:text-stone-100 border ${
                           errors.name
                             ? 'border-rose-400 focus:ring-rose-500'
-                            : 'border-stone-200 dark:border-stone-700 focus:ring-sky-500'
+                            : 'border-stone-200/60 dark:border-white/[0.08] focus:ring-sky-500'
                         } focus:outline-none focus:ring-2`}
                       />
                       {errors.name && (
@@ -278,10 +290,10 @@ export function ContactSection() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="name@example.com"
-                        className={`w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border ${
+                        className={`w-full px-4 py-3 text-base sm:text-sm rounded-xl bg-stone-100/60 dark:bg-stone-800/50 text-stone-900 dark:text-stone-100 border ${
                           errors.email
                             ? 'border-rose-400 focus:ring-rose-500'
-                            : 'border-stone-200 dark:border-stone-700 focus:ring-sky-500'
+                            : 'border-stone-200/60 dark:border-white/[0.08] focus:ring-sky-500'
                         } focus:outline-none focus:ring-2`}
                       />
                       {errors.email && (
@@ -306,7 +318,7 @@ export function ContactSection() {
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       placeholder="Collaboration / Engineering opportunity"
-                      className="w-full px-4 py-2.5 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border border-stone-200 dark:border-stone-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                      className="w-full px-4 py-3 text-base sm:text-sm rounded-xl bg-stone-100/60 dark:bg-stone-800/50 text-stone-900 dark:text-stone-100 border border-stone-200/60 dark:border-white/[0.08] focus:outline-none focus:ring-2 focus:ring-sky-500"
                     />
                   </div>
 
@@ -319,14 +331,14 @@ export function ContactSection() {
                     </label>
                     <textarea
                       id="message"
-                      rows={6}
+                      rows={5}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Hello Shree, I noticed your full-stack web applications..."
-                      className={`w-full flex-1 min-h-[160px] px-4 py-3 text-xs sm:text-sm rounded-xl bg-stone-50 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border ${
+                      className={`w-full flex-1 min-h-[140px] px-4 py-3 text-base sm:text-sm rounded-xl bg-stone-100/60 dark:bg-stone-800/50 text-stone-900 dark:text-stone-100 border ${
                         errors.message
                           ? 'border-rose-400 focus:ring-rose-500'
-                          : 'border-stone-200 dark:border-stone-700 focus:ring-sky-500'
+                          : 'border-stone-200/60 dark:border-white/[0.08] focus:ring-sky-500'
                       } focus:outline-none focus:ring-2 resize-none`}
                     />
                     {errors.message && (
@@ -342,7 +354,7 @@ export function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-xs sm:text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-xl shadow-xs transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+                    className="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-semibold text-white dark:text-stone-950 bg-stone-900 dark:bg-stone-100 hover:bg-stone-800 dark:hover:bg-stone-200 rounded-xl shadow-xs transition-all duration-200 active:scale-[0.98] disabled:opacity-50"
                   >
                     <Send className="w-4 h-4" />
                     <span>{status === 'submitting' ? 'Sending message...' : 'Send Message'}</span>
@@ -350,7 +362,7 @@ export function ContactSection() {
                 </div>
               </form>
             )}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
