@@ -37,6 +37,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         href={project.liveUrl}
         target="_blank"
         rel="noopener noreferrer"
+        data-cursor="view"
         title={`Open live site for ${project.title}`}
         className="relative h-48 w-full bg-stone-950 p-4 flex flex-col justify-between overflow-hidden cursor-pointer block group/preview"
       >

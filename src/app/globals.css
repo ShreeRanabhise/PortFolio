@@ -29,6 +29,9 @@
     --peach-bg: rgba(255, 237, 213, 0.6);
     --peach-border: rgba(254, 215, 170, 0.8);
     --peach-text: #c2410c;
+
+    /* Motion Tokens */
+    --ease-out-cubic: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dark {

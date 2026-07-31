@@ -2,32 +2,56 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { Menu, X, FileText, Download } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Download } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
-import { ResumeModal } from '@/components/resume/ResumeModal';
 import { personalInfo } from '@/data/portfolioData';
 
 const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Education', href: '#education' },
-  { name: 'Certificates', href: '#certificates' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'About', href: '#about', id: 'about' },
+  { name: 'Skills', href: '#skills', id: 'skills' },
+  { name: 'Projects', href: '#projects', id: 'projects' },
+  { name: 'Experience', href: '#experience', id: 'experience' },
+  { name: 'Education', href: '#education', id: 'education' },
+  { name: 'Certificates', href: '#certificates', id: 'certificates' },
+  { name: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Simple active section detection
+      const scrollPos = window.scrollY + 200;
+      for (const link of navLinks) {
+        const el = document.getElementById(link.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(link.id);
+            break;
+          }
+        }
+      }
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   return (
@@ -54,15 +78,29 @@ export function Navbar() {
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-stone-200/40 dark:bg-stone-800/40 p-1.5 rounded-full border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-xs shrink min-w-0">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="px-2.5 lg:px-3.5 py-1.5 text-[11px] lg:text-xs font-medium text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100 rounded-full hover:bg-stone-200/60 dark:hover:bg-stone-700/50 transition-all duration-200 whitespace-nowrap"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative px-2.5 lg:px-3.5 py-1.5 text-[11px] lg:text-xs font-medium rounded-full transition-all duration-200 whitespace-nowrap ${
+                  isActive
+                    ? 'text-stone-950 dark:text-white font-bold'
+                    : 'text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-stone-100'
+                }`}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="activeNavPill"
+                    className="absolute inset-0 rounded-full bg-stone-200/90 dark:bg-stone-700/80 -z-10 shadow-2xs"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right CTA Actions */}
@@ -100,33 +138,47 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-[#faf9f5]/95 dark:bg-[#0c0f16]/95 backdrop-blur-lg border-b border-stone-200/80 dark:border-white/[0.08] p-4 shadow-lg animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col gap-1.5">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="min-h-[44px] px-4 py-3 text-base font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-200/40 dark:hover:bg-stone-800/50 active:bg-stone-200/60 dark:active:bg-stone-800/80 rounded-xl transition-colors flex items-center"
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="pt-3 border-t border-stone-200/60 dark:border-white/[0.08] flex items-center justify-center">
-              <a
-                href="/Shree_Ranabhise_Resume.pdf"
-                download="Shree_Ranabhise_Resume.pdf"
-                className="w-full min-h-[44px] py-3 px-4 text-sm font-semibold text-sky-950 dark:text-sky-200 bg-sky-100 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800/80 rounded-xl flex items-center justify-center gap-2 active:scale-[0.99] transition-transform"
-              >
-                <Download className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                <span>Download Resume</span>
-              </a>
-            </div>
-          </nav>
-        </div>
-      )}
+      {/* Mobile Drawer with AnimatePresence */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden absolute top-full left-0 right-0 bg-[#faf9f5]/95 dark:bg-[#0c0f16]/95 backdrop-blur-lg border-b border-stone-200/80 dark:border-white/[0.08] p-4 shadow-lg"
+          >
+            <nav className="flex flex-col gap-1.5">
+              {navLinks.map((link, idx) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.03, duration: 0.2 }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="min-h-[44px] px-4 py-3 text-base font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-200/40 dark:hover:bg-stone-800/50 active:bg-stone-200/60 dark:active:bg-stone-800/80 rounded-xl transition-colors flex items-center"
+                  >
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
+              <div className="pt-3 border-t border-stone-200/60 dark:border-white/[0.08] flex items-center justify-center">
+                <a
+                  href="/Shree_Ranabhise_Resume.pdf"
+                  download="Shree_Ranabhise_Resume.pdf"
+                  className="w-full min-h-[44px] py-3 px-4 text-sm font-semibold text-sky-950 dark:text-sky-200 bg-sky-100 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800/80 rounded-xl flex items-center justify-center gap-2 active:scale-[0.99] transition-transform"
+                >
+                  <Download className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                  <span>Download Resume</span>
+                </a>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -9,11 +9,23 @@ import { personalInfo } from '@/data/portfolioData';
 export function Hero() {
   return (
     <section className="relative pt-20 sm:pt-24 pb-6 sm:pb-10 flex items-center justify-center overflow-hidden">
-      {/* Imperceptible Ambient Color Blooms */}
+      {/* Imperceptible Ambient Color Blooms with slow drift */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-28 -left-20 w-[26rem] h-[26rem] rounded-full bg-sky-200/30 dark:bg-sky-900/15 blur-3xl" />
-        <div className="absolute top-1/4 -right-28 w-[30rem] h-[30rem] rounded-full bg-purple-200/25 dark:bg-purple-900/15 blur-3xl" />
-        <div className="absolute -bottom-24 left-1/3 w-[24rem] h-[24rem] rounded-full bg-emerald-100/30 dark:bg-emerald-950/15 blur-3xl" />
+        <motion.div
+          animate={{ y: [0, -12, 0], x: [0, 8, 0] }}
+          transition={{ duration: 16, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+          className="absolute -top-28 -left-20 w-[26rem] h-[26rem] rounded-full bg-sky-200/30 dark:bg-sky-900/15 blur-3xl"
+        />
+        <motion.div
+          animate={{ y: [0, 14, 0], x: [0, -10, 0] }}
+          transition={{ duration: 18, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+          className="absolute top-1/4 -right-28 w-[30rem] h-[30rem] rounded-full bg-purple-200/25 dark:bg-purple-900/15 blur-3xl"
+        />
+        <motion.div
+          animate={{ y: [0, -10, 0] }}
+          transition={{ duration: 14, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
+          className="absolute -bottom-24 left-1/3 w-[24rem] h-[24rem] rounded-full bg-emerald-100/30 dark:bg-emerald-950/15 blur-3xl"
+        />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
