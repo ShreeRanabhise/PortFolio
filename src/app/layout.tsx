@@ -43,6 +43,11 @@ export const metadata: Metadata = {
   authors: [{ name: 'Shree Ranabhise', url: 'https://shreeranabhise.vercel.app' }],
   creator: 'Shree Ranabhise',
   publisher: 'Shree Ranabhise',
+  icons: {
+    icon: '/icon.svg',
+    shortcut: '/icon.svg',
+    apple: '/icon.svg',
+  },
   alternates: {
     canonical: 'https://shreeranabhise.vercel.app',
   },
@@ -142,7 +147,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
         />
       </head>
-      <body className="font-sans antialiased bg-[#fcfbf9] text-[#27272a] dark:bg-[#0f1218] dark:text-[#f4f4f5] transition-colors duration-300">
+      <body className="font-sans antialiased bg-[#faf9f5] text-[#18181b] dark:bg-[#0c0f16] dark:text-[#f8fafc] bg-grain transition-colors duration-300">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-sky-600 focus:text-white focus:rounded-md focus:shadow-lg focus:outline-none"
