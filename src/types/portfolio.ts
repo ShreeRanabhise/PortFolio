@@ -30,7 +30,7 @@ export interface Certificate {
   skills: string[];
 }
 
-export type SkillCategoryType = 'Frontend' | 'Backend' | 'Design & UI/UX' | 'Tools & Cloud' | 'AI & Methods';
+export type SkillCategoryType = 'Frontend' | 'Frontend & SEO' | 'Backend' | 'Design & UI/UX' | 'Tools & Cloud' | 'SEO & Web Performance' | 'AI & Methods' | string;
 
 export interface SkillCategory {
   category: SkillCategoryType;
