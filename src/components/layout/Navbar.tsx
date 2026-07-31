@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download, User, Code, Layout, Briefcase, GraduationCap, Award, Mail, Phone, ArrowRight, ExternalLink, MapPin } from 'lucide-react';
+import { Menu, X, Download, User, Code, Layout, Briefcase, GraduationCap, Award, Mail, ArrowUpRight, MapPin, Sparkles } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { personalInfo, projects } from '@/data/portfolioData';
 
@@ -131,229 +131,270 @@ export function Navbar() {
                   {link.name}
                 </Link>
 
-                {/* Popover Window Positioned Exactly Below Hovered Tab */}
+                {/* Modern Minimalist Popover Window Positioned Exactly Below Hovered Tab */}
                 <AnimatePresence>
                   {isHovered && (
                     <motion.div
-                      initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                      initial={{ opacity: 0, y: 10, scale: 0.96 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 4, scale: 0.95 }}
-                      transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2.5 w-72 sm:w-80 p-3.5 rounded-2xl bg-white/95 dark:bg-stone-900/95 border border-stone-200/80 dark:border-white/10 shadow-xl backdrop-blur-lg z-50 text-left pointer-events-auto"
+                      exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-80 p-4 rounded-3xl bg-white/95 dark:bg-stone-900/95 border border-stone-200/80 dark:border-white/10 shadow-2xl shadow-stone-900/10 dark:shadow-black/60 backdrop-blur-xl z-50 text-left pointer-events-auto overflow-hidden ring-1 ring-stone-900/5 dark:ring-white/10"
                     >
                       {/* ABOUT POPOVER */}
                       {link.id === 'about' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <User className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                              About Shree
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="flex items-center gap-2">
+                              <div className="w-7 h-7 rounded-xl bg-sky-50 dark:bg-sky-950/60 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                                <User className="w-3.5 h-3.5" />
+                              </div>
+                              <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
+                                Overview
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full">
+                              Available
+                            </span>
+                          </div>
+
+                          <div className="space-y-1">
+                            <h4 className="text-sm font-bold text-stone-900 dark:text-white">
+                              Shree Ranabhise
                             </h4>
+                            <p className="text-xs text-stone-600 dark:text-stone-300 leading-relaxed font-normal">
+                              AI Web Developer & Cloud Architecture Engineer with MCA & BSc CS degrees.
+                            </p>
                           </div>
-                          <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
-                            AI Web Developer & Cloud Architecture Engineer with MCA & BSc CS.
-                          </p>
-                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800 flex flex-col gap-1.5">
-                            <Link
-                              href="#about"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between p-2 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-xs font-bold text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors"
-                            >
-                              <span>Explore About Section</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
+
+                          <div className="flex items-center gap-1.5 text-[11px] text-stone-500 dark:text-stone-400">
+                            <MapPin className="w-3 h-3 text-sky-500" />
+                            <span>Pune, MH, India</span>
                           </div>
+
+                          <Link
+                            href="#about"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-stone-900 hover:text-white dark:hover:bg-white dark:hover:text-stone-950 transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>Explore Profile & Background</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
 
                       {/* SKILLS POPOVER */}
                       {link.id === 'skills' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <Code className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                              Technical Matrix
-                            </h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="w-7 h-7 rounded-xl bg-purple-50 dark:bg-purple-950/60 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                              <Code className="w-3.5 h-3.5" />
+                            </div>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
+                              Core Engineering Stack
+                            </span>
                           </div>
+
                           <div className="flex flex-wrap gap-1.5">
                             {['Next.js 15', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma', 'Supabase', 'Vercel'].map((skill) => (
                               <span
                                 key={skill}
-                                className="px-2 py-0.5 text-[11px] font-bold rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border border-stone-200/60 dark:border-stone-700/60"
+                                className="px-2.5 py-1 text-[11px] font-semibold rounded-xl bg-stone-100 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border border-stone-200/60 dark:border-stone-700/60"
                               >
                                 {skill}
                               </span>
                             ))}
                           </div>
-                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
-                            <Link
-                              href="#skills"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-xs font-bold text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors"
-                            >
-                              <span>View Full Skill Matrix</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
+
+                          <Link
+                            href="#skills"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-purple-600 hover:text-white dark:hover:bg-purple-500 dark:hover:text-white transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>Explore Full Skill Matrix</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
 
                       {/* PROJECTS POPOVER */}
                       {link.id === 'projects' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <Layout className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                              Featured Projects ({projects.length})
-                            </h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="flex items-center gap-2">
+                              <div className="w-7 h-7 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                                <Layout className="w-3.5 h-3.5" />
+                              </div>
+                              <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
+                                Featured Works
+                              </span>
+                            </div>
+                            <span className="text-[10px] font-bold text-stone-500 dark:text-stone-400">
+                              3 Apps
+                            </span>
                           </div>
+
                           <div className="space-y-1.5">
                             {projects.map((proj) => (
                               <Link
                                 key={proj.slug}
                                 href={`/projects/${proj.slug}`}
                                 onClick={handleLinkClick}
-                                className="flex items-center justify-between p-2 rounded-xl bg-stone-50 dark:bg-stone-800/60 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-stone-200/40 dark:border-stone-700/40 transition-colors group"
+                                className="group flex items-center justify-between p-2 rounded-xl hover:bg-stone-100/80 dark:hover:bg-stone-800/80 transition-colors"
                               >
-                                <span className="text-xs font-bold text-stone-900 dark:text-stone-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300">
-                                  {proj.title}
-                                </span>
-                                <span className="text-[10px] font-semibold text-stone-500 dark:text-stone-400 flex items-center gap-0.5">
-                                  View ↗
-                                </span>
+                                <div className="flex items-center gap-2">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                  <span className="text-xs font-semibold text-stone-800 dark:text-stone-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                                    {proj.title}
+                                  </span>
+                                </div>
+                                <ArrowUpRight className="w-3.5 h-3.5 text-stone-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                               </Link>
                             ))}
                           </div>
-                          <div className="pt-1.5 border-t border-stone-100 dark:border-stone-800">
-                            <Link
-                              href="#projects"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
-                            >
-                              <span>Browse All Projects</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
+
+                          <Link
+                            href="#projects"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>Browse All Portfolio Projects</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
 
                       {/* EXPERIENCE POPOVER */}
                       {link.id === 'experience' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <Briefcase className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                              Work Experience
-                            </h4>
-                          </div>
-                          <div className="space-y-1">
-                            <h5 className="text-xs font-bold text-stone-900 dark:text-stone-100">
-                              Associate Tech Specialist @ IGT Solutions
-                            </h5>
-                            <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400 block">
-                              Dec 2023 - Jan 2026 (2+ Yrs)
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="w-7 h-7 rounded-xl bg-orange-50 dark:bg-orange-950/60 flex items-center justify-center text-orange-600 dark:text-orange-400">
+                              <Briefcase className="w-3.5 h-3.5" />
+                            </div>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
+                              Current Role
                             </span>
                           </div>
-                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
-                            <Link
-                              href="#experience"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-orange-50 dark:bg-orange-950/40 text-xs font-bold text-orange-700 dark:text-orange-300 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-colors"
-                            >
-                              <span>Go to Experience Section</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
+
+                          <div className="space-y-1">
+                            <h4 className="text-xs font-bold text-stone-900 dark:text-white">
+                              Associate Tech Specialist
+                            </h4>
+                            <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400 block">
+                              IGT Solutions • Dec 2023 - Jan 2026
+                            </span>
                           </div>
+
+                          <Link
+                            href="#experience"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-orange-600 hover:text-white dark:hover:bg-orange-500 dark:hover:text-white transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>View Work Experience Timeline</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
 
                       {/* EDUCATION POPOVER */}
                       {link.id === 'education' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <GraduationCap className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                              Academic Qualifications
-                            </h4>
-                          </div>
-                          <div className="space-y-1.5 text-xs text-stone-900 dark:text-stone-100 font-semibold">
-                            <div className="flex items-center justify-between">
-                              <span>MCA (2023 - 2026)</span>
-                              <span className="text-sky-600 dark:text-sky-400 font-bold">CGPA 6.45</span>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="w-7 h-7 rounded-xl bg-sky-50 dark:bg-sky-950/60 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                              <GraduationCap className="w-3.5 h-3.5" />
                             </div>
-                            <div className="flex items-center justify-between">
-                              <span>BSc CS (2020 - 2023)</span>
-                              <span className="text-emerald-600 dark:text-emerald-400 font-bold">CGPA 9.34</span>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
+                              Academic Degrees
+                            </span>
+                          </div>
+
+                          <div className="space-y-2">
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="font-semibold text-stone-800 dark:text-stone-200">MCA (ASM IMCOST)</span>
+                              <span className="font-bold text-sky-600 dark:text-sky-400">CGPA 6.45</span>
+                            </div>
+                            <div className="flex items-center justify-between text-xs">
+                              <span className="font-semibold text-stone-800 dark:text-stone-200">BSc CS (Model College)</span>
+                              <span className="font-bold text-emerald-600 dark:text-emerald-400">CGPA 9.34</span>
                             </div>
                           </div>
-                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
-                            <Link
-                              href="#education"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-xs font-bold text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors"
-                            >
-                              <span>View Academic Details</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
+
+                          <Link
+                            href="#education"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-sky-600 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>View Academic Background</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
 
                       {/* CERTIFICATES POPOVER */}
                       {link.id === 'certificates' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <Award className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="w-7 h-7 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                              <Award className="w-3.5 h-3.5" />
+                            </div>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
                               Certifications
-                            </h4>
+                            </span>
                           </div>
-                          <div className="space-y-1.5 text-xs font-semibold">
-                            <span className="block text-stone-900 dark:text-stone-100">✓ Bolt IoT Web Development</span>
-                            <span className="block text-stone-900 dark:text-stone-100">✓ Anudip Power BI & Data Analytics</span>
+
+                          <div className="space-y-1.5 text-xs text-stone-700 dark:text-stone-300 font-medium">
+                            <div className="flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                              <span>Bolt IoT — Web Development</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+                              <span>Anudip — Power BI & Data Analytics</span>
+                            </div>
                           </div>
-                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
-                            <Link
-                              href="#certificates"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
-                            >
-                              <span>View Certifications</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
+
+                          <Link
+                            href="#certificates"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-emerald-600 hover:text-white dark:hover:bg-emerald-500 dark:hover:text-white transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>View Verified Certificates</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
 
                       {/* CONTACT POPOVER */}
                       {link.id === 'contact' && (
-                        <div className="space-y-2.5">
-                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                            <Mail className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                              Direct Contact Channels
-                            </h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800/80 pb-2.5">
+                            <div className="w-7 h-7 rounded-xl bg-sky-50 dark:bg-sky-950/60 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                              <Mail className="w-3.5 h-3.5" />
+                            </div>
+                            <span className="text-[10px] font-mono uppercase tracking-widest text-stone-600 dark:text-stone-300 font-bold">
+                              Direct Contact
+                            </span>
                           </div>
-                          <div className="space-y-1.5 text-xs text-stone-900 dark:text-stone-100 font-bold">
-                            <a href={`tel:${personalInfo.phone}`} className="flex items-center justify-between p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800">
-                              <span className="text-stone-500 font-normal">Call:</span>
+
+                          <div className="space-y-1.5 text-xs font-semibold">
+                            <a href={`tel:${personalInfo.phone}`} className="flex items-center justify-between p-2 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 transition-colors">
+                              <span className="text-stone-500 font-normal">Phone:</span>
                               <span>{personalInfo.phone}</span>
                             </a>
-                            <a href={`mailto:${personalInfo.email}`} className="flex items-center justify-between p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800">
+                            <a href={`mailto:${personalInfo.email}`} className="flex items-center justify-between p-2 rounded-xl hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-200 transition-colors">
                               <span className="text-stone-500 font-normal">Email:</span>
                               <span className="text-sky-600 dark:text-sky-400">{personalInfo.email}</span>
                             </a>
                           </div>
-                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
-                            <Link
-                              href="#contact"
-                              onClick={handleLinkClick}
-                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-xs font-bold text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors"
-                            >
-                              <span>Open Direct Contact Form</span>
-                              <ArrowRight className="w-3.5 h-3.5" />
-                            </Link>
-                          </div>
+
+                          <Link
+                            href="#contact"
+                            onClick={handleLinkClick}
+                            className="group flex items-center justify-between p-2.5 rounded-2xl bg-stone-100/80 dark:bg-stone-800/80 hover:bg-sky-600 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white transition-all duration-200 font-bold text-xs"
+                          >
+                            <span>Open Direct Contact Form</span>
+                            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </Link>
                         </div>
                       )}
                     </motion.div>
@@ -392,7 +433,7 @@ export function Navbar() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
-            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-stone-700 dark:text-stone-300 bg-stone-100 dark:bg-stone-800/70 border border-stone-200 dark:border-stone-700/70 hover:bg-stone-200/60 dark:hover:bg-stone-700 flex items-center justify-center active:scale-95 transition-transform"
+            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-stone-700 dark:text-stone-300 bg-[#faf9f5] dark:bg-stone-800/70 border border-stone-200 dark:border-stone-700/70 hover:bg-stone-200/60 dark:hover:bg-stone-700 flex items-center justify-center active:scale-95 transition-transform"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
