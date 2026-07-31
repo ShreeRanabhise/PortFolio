@@ -411,9 +411,9 @@ export function Navbar() {
           <a
             href="/Shree_Ranabhise_Resume.pdf"
             download="Shree_Ranabhise_Resume.pdf"
-            className="group inline-flex items-center gap-1.5 px-3.5 lg:px-4 py-2 text-xs font-bold text-sky-950 dark:text-sky-100 bg-sky-100/90 hover:bg-sky-200/90 dark:bg-sky-950/70 dark:hover:bg-sky-900/70 border border-sky-300/80 dark:border-sky-800/80 rounded-full transition-all duration-200 shadow-2xs hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
+            className="group inline-flex items-center gap-1.5 px-3.5 lg:px-4 py-2 text-xs font-bold text-white bg-stone-900 hover:bg-stone-800 dark:text-stone-950 dark:bg-white dark:hover:bg-stone-100 border border-stone-800 dark:border-white rounded-full transition-all duration-200 shadow-xs hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
           >
-            <Download className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 group-hover:translate-y-0.5 transition-transform duration-200" />
+            <Download className="w-3.5 h-3.5 text-white dark:text-stone-950 group-hover:translate-y-0.5 transition-transform duration-200" />
             <span>Resume</span>
           </a>
         </div>
@@ -425,9 +425,9 @@ export function Navbar() {
             download="Shree_Ranabhise_Resume.pdf"
             aria-label="Download Resume"
             title="Download Resume"
-            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-sky-700 dark:text-sky-300 bg-sky-100/80 dark:bg-sky-950/60 border border-sky-200 dark:border-sky-800/70 flex items-center justify-center active:scale-95 transition-transform"
+            className="min-w-[44px] min-h-[44px] p-2.5 rounded-xl text-white bg-stone-900 hover:bg-stone-800 dark:text-stone-950 dark:bg-white dark:hover:bg-stone-100 border border-stone-800 dark:border-white flex items-center justify-center active:scale-95 transition-transform"
           >
-            <Download className="w-4.5 h-4.5" />
+            <Download className="w-4.5 h-4.5 text-white dark:text-stone-950" />
           </a>
           <ThemeToggle />
           <button
@@ -471,9 +471,9 @@ export function Navbar() {
                 <a
                   href="/Shree_Ranabhise_Resume.pdf"
                   download="Shree_Ranabhise_Resume.pdf"
-                  className="w-full min-h-[44px] py-3 px-4 text-sm font-semibold text-sky-950 dark:text-sky-200 bg-sky-100 dark:bg-sky-950/70 border border-sky-200 dark:border-sky-800/80 rounded-xl flex items-center justify-center gap-2 active:scale-[0.99] transition-transform"
+                  className="w-full min-h-[44px] py-3 px-4 text-sm font-bold text-white bg-stone-900 hover:bg-stone-800 dark:text-stone-950 dark:bg-white dark:hover:bg-stone-100 border border-stone-800 dark:border-white rounded-xl flex items-center justify-center gap-2 active:scale-[0.99] transition-transform"
                 >
-                  <Download className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                  <Download className="w-4 h-4 text-white dark:text-stone-950" />
                   <span>Download Resume</span>
                 </a>
               </div>

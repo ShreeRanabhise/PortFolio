@@ -17,9 +17,9 @@ export function ResumeModal() {
       {/* Trigger Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-sky-900 dark:text-sky-200 bg-sky-100/90 hover:bg-sky-200 dark:bg-sky-950/70 dark:hover:bg-sky-900/70 border border-sky-200 dark:border-sky-800/80 rounded-full transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer"
+        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold text-white bg-stone-900 hover:bg-stone-800 dark:text-stone-950 dark:bg-white dark:hover:bg-stone-100 border border-stone-800 dark:border-white rounded-full transition-all shadow-xs hover:scale-105 active:scale-95 cursor-pointer"
       >
-        <FileText className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
+        <FileText className="w-3.5 h-3.5 text-white dark:text-stone-950" />
         <span>Resume</span>
       </button>
 
