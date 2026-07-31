@@ -7,7 +7,7 @@ import { projects } from '@/data/portfolioData';
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 bg-stone-50/40 dark:bg-stone-900/20">
+    <section id="projects" className="py-10 sm:py-14 bg-stone-100/30 dark:bg-stone-900/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Portfolio Work"

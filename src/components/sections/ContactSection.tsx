@@ -50,7 +50,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-stone-100/30 dark:bg-stone-900/20">
+    <section id="contact" className="py-10 sm:py-14 bg-stone-100/30 dark:bg-stone-900/20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="Get In Touch"
@@ -59,7 +59,7 @@ export function ContactSection() {
           subtitle="Open for Cloud Architecture & Full-Stack Web Development roles, full-time engineering positions, and collaborative projects."
         />
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="mt-8 sm:mt-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Contact Details & Links (6 cols) */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}

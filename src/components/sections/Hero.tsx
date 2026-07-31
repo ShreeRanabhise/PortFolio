@@ -8,7 +8,7 @@ import { personalInfo } from '@/data/portfolioData';
 
 export function Hero() {
   return (
-    <section className="relative min-h-[88vh] pt-28 pb-16 flex items-center justify-center overflow-hidden">
+    <section className="relative pt-20 sm:pt-24 pb-6 sm:pb-10 flex items-center justify-center overflow-hidden">
       {/* Imperceptible Ambient Color Blooms */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-28 -left-20 w-[26rem] h-[26rem] rounded-full bg-sky-200/30 dark:bg-sky-900/15 blur-3xl" />
