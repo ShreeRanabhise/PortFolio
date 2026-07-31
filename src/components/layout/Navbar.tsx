@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Download, User, Code, Layout, Briefcase, GraduationCap, Award, Mail, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Download, User, Code, Layout, Briefcase, GraduationCap, Award, Mail, Phone, ArrowRight, ExternalLink, MapPin } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 import { personalInfo, projects } from '@/data/portfolioData';
 
@@ -33,6 +33,11 @@ export function Navbar() {
     hoverTimeoutRef.current = setTimeout(() => {
       setHoveredTab(null);
     }, 150);
+  };
+
+  const handleLinkClick = () => {
+    setHoveredTab(null);
+    setMobileMenuOpen(false);
   };
 
   useEffect(() => {
@@ -92,206 +97,272 @@ export function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Navigation Links with Popover Triggers */}
+        {/* Desktop Navigation Links with Popovers Positioned Exactly Below Each Tab */}
         <nav
           className="hidden md:flex items-center gap-0.5 lg:gap-1 bg-stone-200/50 dark:bg-stone-800/50 p-1.5 rounded-full border border-stone-300/50 dark:border-white/[0.1] backdrop-blur-xs shrink min-w-0"
           onMouseLeave={handleMouseLeaveTab}
         >
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
+            const isHovered = hoveredTab === link.id;
+
             return (
-              <Link
+              <div
                 key={link.name}
-                href={link.href}
+                className="relative"
                 onMouseEnter={() => handleMouseEnterTab(link.id)}
-                className={`relative px-2.5 lg:px-3.5 py-1.5 text-[11px] lg:text-xs font-semibold rounded-full transition-all duration-200 whitespace-nowrap ${
-                  isActive
-                    ? 'text-stone-950 dark:text-white font-bold'
-                    : 'text-stone-700 dark:text-stone-200 hover:text-stone-950 dark:hover:text-white'
-                }`}
+                onMouseLeave={handleMouseLeaveTab}
               >
-                {isActive && (
-                  <motion.span
-                    layoutId="activeNavPill"
-                    className="absolute inset-0 rounded-full bg-white dark:bg-stone-700 shadow-2xs -z-10"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                  />
-                )}
-                {link.name}
-              </Link>
+                <Link
+                  href={link.href}
+                  className={`relative block px-2.5 lg:px-3.5 py-1.5 text-[11px] lg:text-xs font-semibold rounded-full transition-all duration-200 whitespace-nowrap ${
+                    isActive
+                      ? 'text-stone-950 dark:text-white font-bold'
+                      : 'text-stone-700 dark:text-stone-200 hover:text-stone-950 dark:hover:text-white'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavPill"
+                      className="absolute inset-0 rounded-full bg-white dark:bg-stone-700 shadow-2xs -z-10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {link.name}
+                </Link>
+
+                {/* Popover Window Positioned Exactly Below Hovered Tab */}
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 4, scale: 0.95 }}
+                      transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-2.5 w-72 sm:w-80 p-3.5 rounded-2xl bg-white/95 dark:bg-stone-900/95 border border-stone-200/80 dark:border-white/10 shadow-xl backdrop-blur-lg z-50 text-left pointer-events-auto"
+                    >
+                      {/* ABOUT POPOVER */}
+                      {link.id === 'about' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <User className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              About Shree
+                            </h4>
+                          </div>
+                          <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
+                            AI Web Developer & Cloud Architecture Engineer with MCA & BSc CS.
+                          </p>
+                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800 flex flex-col gap-1.5">
+                            <Link
+                              href="#about"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between p-2 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-xs font-bold text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors"
+                            >
+                              <span>Explore About Section</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* SKILLS POPOVER */}
+                      {link.id === 'skills' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <Code className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              Technical Matrix
+                            </h4>
+                          </div>
+                          <div className="flex flex-wrap gap-1.5">
+                            {['Next.js 15', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma', 'Supabase', 'Vercel'].map((skill) => (
+                              <span
+                                key={skill}
+                                className="px-2 py-0.5 text-[11px] font-bold rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border border-stone-200/60 dark:border-stone-700/60"
+                              >
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+                            <Link
+                              href="#skills"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-purple-50 dark:bg-purple-950/40 text-xs font-bold text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-colors"
+                            >
+                              <span>View Full Skill Matrix</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* PROJECTS POPOVER */}
+                      {link.id === 'projects' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <Layout className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              Featured Projects ({projects.length})
+                            </h4>
+                          </div>
+                          <div className="space-y-1.5">
+                            {projects.map((proj) => (
+                              <Link
+                                key={proj.slug}
+                                href={`/projects/${proj.slug}`}
+                                onClick={handleLinkClick}
+                                className="flex items-center justify-between p-2 rounded-xl bg-stone-50 dark:bg-stone-800/60 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 border border-stone-200/40 dark:border-stone-700/40 transition-colors group"
+                              >
+                                <span className="text-xs font-bold text-stone-900 dark:text-stone-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-300">
+                                  {proj.title}
+                                </span>
+                                <span className="text-[10px] font-semibold text-stone-500 dark:text-stone-400 flex items-center gap-0.5">
+                                  View ↗
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                          <div className="pt-1.5 border-t border-stone-100 dark:border-stone-800">
+                            <Link
+                              href="#projects"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
+                            >
+                              <span>Browse All Projects</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* EXPERIENCE POPOVER */}
+                      {link.id === 'experience' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <Briefcase className="w-4 h-4 text-orange-600 dark:text-orange-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              Work Experience
+                            </h4>
+                          </div>
+                          <div className="space-y-1">
+                            <h5 className="text-xs font-bold text-stone-900 dark:text-stone-100">
+                              Associate Tech Specialist @ IGT Solutions
+                            </h5>
+                            <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400 block">
+                              Dec 2023 - Jan 2026 (2+ Yrs)
+                            </span>
+                          </div>
+                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+                            <Link
+                              href="#experience"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-orange-50 dark:bg-orange-950/40 text-xs font-bold text-orange-700 dark:text-orange-300 hover:bg-orange-100 dark:hover:bg-orange-900/50 transition-colors"
+                            >
+                              <span>Go to Experience Section</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* EDUCATION POPOVER */}
+                      {link.id === 'education' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <GraduationCap className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              Academic Qualifications
+                            </h4>
+                          </div>
+                          <div className="space-y-1.5 text-xs text-stone-900 dark:text-stone-100 font-semibold">
+                            <div className="flex items-center justify-between">
+                              <span>MCA (2023 - 2026)</span>
+                              <span className="text-sky-600 dark:text-sky-400 font-bold">CGPA 6.45</span>
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <span>BSc CS (2020 - 2023)</span>
+                              <span className="text-emerald-600 dark:text-emerald-400 font-bold">CGPA 9.34</span>
+                            </div>
+                          </div>
+                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+                            <Link
+                              href="#education"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-xs font-bold text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors"
+                            >
+                              <span>View Academic Details</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* CERTIFICATES POPOVER */}
+                      {link.id === 'certificates' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <Award className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              Certifications
+                            </h4>
+                          </div>
+                          <div className="space-y-1.5 text-xs font-semibold">
+                            <span className="block text-stone-900 dark:text-stone-100">✓ Bolt IoT Web Development</span>
+                            <span className="block text-stone-900 dark:text-stone-100">✓ Anudip Power BI & Data Analytics</span>
+                          </div>
+                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+                            <Link
+                              href="#certificates"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50 transition-colors"
+                            >
+                              <span>View Certifications</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* CONTACT POPOVER */}
+                      {link.id === 'contact' && (
+                        <div className="space-y-2.5">
+                          <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
+                            <Mail className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
+                              Direct Contact Channels
+                            </h4>
+                          </div>
+                          <div className="space-y-1.5 text-xs text-stone-900 dark:text-stone-100 font-bold">
+                            <a href={`tel:${personalInfo.phone}`} className="flex items-center justify-between p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800">
+                              <span className="text-stone-500 font-normal">Call:</span>
+                              <span>{personalInfo.phone}</span>
+                            </a>
+                            <a href={`mailto:${personalInfo.email}`} className="flex items-center justify-between p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800">
+                              <span className="text-stone-500 font-normal">Email:</span>
+                              <span className="text-sky-600 dark:text-sky-400">{personalInfo.email}</span>
+                            </a>
+                          </div>
+                          <div className="pt-2 border-t border-stone-100 dark:border-stone-800">
+                            <Link
+                              href="#contact"
+                              onClick={handleLinkClick}
+                              className="inline-flex items-center justify-between w-full p-2 rounded-xl bg-sky-50 dark:bg-sky-950/40 text-xs font-bold text-sky-700 dark:text-sky-300 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition-colors"
+                            >
+                              <span>Open Direct Contact Form</span>
+                              <ArrowRight className="w-3.5 h-3.5" />
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             );
           })}
         </nav>
-
-        {/* Floating Header Tab Elements Popover Window */}
-        <AnimatePresence>
-          {hoveredTab && (
-            <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.97 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 6, scale: 0.97 }}
-              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              onMouseEnter={() => {
-                if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
-              }}
-              onMouseLeave={handleMouseLeaveTab}
-              className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 mt-2 w-full max-w-md p-4 rounded-2xl bg-white/95 dark:bg-stone-900/95 border border-stone-200/80 dark:border-white/10 shadow-xl backdrop-blur-lg z-50 text-left pointer-events-auto"
-            >
-              {hoveredTab === 'about' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <User className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      About Shree Ranabhise
-                    </h4>
-                  </div>
-                  <p className="text-xs text-stone-700 dark:text-stone-300 leading-relaxed font-medium">
-                    AI Web Developer & Cloud Architecture Engineer with MCA & BSc CS. Specialized in building clean, resilient, cloud-ready software.
-                  </p>
-                  <div className="flex items-center justify-between text-[11px] text-stone-600 dark:text-stone-400 pt-1 border-t border-stone-100 dark:border-stone-800">
-                    <span className="flex items-center gap-1 font-semibold text-stone-900 dark:text-stone-100">
-                      <MapPin className="w-3 h-3 text-sky-500" /> Pune, MH, India
-                    </span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">● Active & Available</span>
-                  </div>
-                </div>
-              )}
-
-              {hoveredTab === 'skills' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <Code className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      Core Engineering Toolkit
-                    </h4>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {['Next.js 15', 'React 19', 'TypeScript', 'PostgreSQL', 'Prisma', 'Supabase', 'Vercel', 'Tailwind CSS', 'Power BI'].map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-2 py-0.5 text-[11px] font-bold rounded-lg bg-stone-100 dark:bg-stone-800 text-stone-900 dark:text-stone-100 border border-stone-200/60 dark:border-stone-700/60"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {hoveredTab === 'projects' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <Layout className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      Featured Solutions ({projects.length})
-                    </h4>
-                  </div>
-                  <div className="space-y-2">
-                    {projects.map((proj) => (
-                      <Link
-                        key={proj.slug}
-                        href={`/projects/${proj.slug}`}
-                        className="flex items-center justify-between p-2 rounded-xl bg-stone-50 dark:bg-stone-800/60 hover:bg-sky-50 dark:hover:bg-sky-950/40 border border-stone-200/40 dark:border-stone-700/40 transition-colors group"
-                      >
-                        <span className="text-xs font-bold text-stone-900 dark:text-stone-100 group-hover:text-sky-600 dark:group-hover:text-sky-400">
-                          {proj.title}
-                        </span>
-                        <span className="text-[10px] font-semibold text-stone-500 dark:text-stone-400 flex items-center gap-0.5">
-                          View ↗
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {hoveredTab === 'experience' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <Briefcase className="w-4 h-4 text-orange-600 dark:text-orange-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      Current Work Experience
-                    </h4>
-                  </div>
-                  <div className="space-y-1">
-                    <h5 className="text-xs font-bold text-stone-900 dark:text-stone-100">
-                      Associate Tech Specialist @ IGT Solutions
-                    </h5>
-                    <span className="text-[11px] font-semibold text-orange-600 dark:text-orange-400 block">
-                      Dec 2023 - Jan 2026 (2+ Years)
-                    </span>
-                    <p className="text-[11px] text-stone-600 dark:text-stone-300 font-medium pt-0.5">
-                      Operational excellence, tech workflows, data QA, and web system maintenance.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {hoveredTab === 'education' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <GraduationCap className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      Academic Background
-                    </h4>
-                  </div>
-                  <div className="space-y-1.5 text-xs text-stone-800 dark:text-stone-200">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-stone-900 dark:text-stone-100">MCA (Aug 2023 - Apr 2026)</span>
-                      <span className="text-[11px] font-bold text-sky-600 dark:text-sky-400">CGPA 6.45</span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-stone-900 dark:text-stone-100">BSc CS (Jul 2020 - May 2023)</span>
-                      <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">CGPA 9.34</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {hoveredTab === 'certificates' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <Award className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      Verified Certifications
-                    </h4>
-                  </div>
-                  <div className="space-y-1.5 text-xs">
-                    <div className="p-1.5 rounded-lg bg-stone-50 dark:bg-stone-800/50">
-                      <span className="font-bold text-stone-900 dark:text-stone-100 block">Bolt IoT — Web Development</span>
-                      <span className="text-[10px] text-stone-500 dark:text-stone-400">PHP, React, Node.JS, SQL, TypeScript, Express</span>
-                    </div>
-                    <div className="p-1.5 rounded-lg bg-stone-50 dark:bg-stone-800/50">
-                      <span className="font-bold text-stone-900 dark:text-stone-100 block">Anudip — Power BI & Data Analytics</span>
-                      <span className="text-[10px] text-stone-500 dark:text-stone-400">MS Excel, Power BI, SQL, Python, SEO</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {hoveredTab === 'contact' && (
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2 border-b border-stone-200/50 dark:border-stone-800 pb-2">
-                    <Mail className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100">
-                      Direct Contact Channels
-                    </h4>
-                  </div>
-                  <div className="space-y-1.5 text-xs text-stone-800 dark:text-stone-200 font-semibold">
-                    <div className="flex items-center justify-between">
-                      <span className="text-stone-500">Phone:</span>
-                      <a href={`tel:${personalInfo.phone}`} className="text-stone-900 dark:text-stone-100 hover:text-sky-600">{personalInfo.phone}</a>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-stone-500">Email:</span>
-                      <a href={`mailto:${personalInfo.email}`} className="text-stone-900 dark:text-stone-100 hover:text-sky-600">{personalInfo.email}</a>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Right CTA Actions with Task-Scoped Motion */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
@@ -348,7 +419,7 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={handleLinkClick}
                     className="min-h-[44px] px-4 py-3 text-base font-medium text-stone-800 dark:text-stone-200 hover:bg-stone-200/40 dark:hover:bg-stone-800/50 active:bg-stone-200/60 dark:active:bg-stone-800/80 rounded-xl transition-colors flex items-center"
                   >
                     {link.name}
