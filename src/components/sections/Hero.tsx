@@ -9,8 +9,8 @@ import dynamic from 'next/dynamic';
 import { personalInfo } from '@/data/portfolioData';
 import { WebGLErrorBoundary } from '@/components/webgl/WebGLErrorBoundary';
 
-// Dynamically import isolated WebGLBackground layer to prevent SSR hydration penalty
-const WebGLBackground = dynamic(() => import('@/components/webgl/WebGLBackground'), {
+// Dynamically import isolated 3D HeroCanvas layer to prevent SSR hydration penalty
+const HeroCanvas = dynamic(() => import('@/components/webgl/HeroCanvas'), {
   ssr: false,
 });
 
@@ -89,7 +89,7 @@ export function Hero() {
             />
           }
         >
-          <WebGLBackground />
+          <HeroCanvas />
         </Suspense>
       </WebGLErrorBoundary>
 
