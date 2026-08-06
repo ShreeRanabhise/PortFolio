@@ -124,7 +124,7 @@ export function Skills() {
                       {skill.name}
                     </h4>
                     {skill.level && (
-                      <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-white dark:bg-white/[0.03] text-slate-700 dark:text-stone-400 border border-slate-200 dark:border-white/[0.06]">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-white dark:bg-white/[0.03] text-slate-700 dark:text-stone-400 border border-slate-200 dark:border-white/[0.06]">
                         {skill.level}
                       </span>
                     )}
@@ -143,7 +143,7 @@ export function Skills() {
         <div className="text-center pt-4">
           <button
             onClick={() => setShowStackDrawer((prev) => !prev)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] hover:border-violet-500/30 text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] hover:border-violet-500/30 text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white text-xs font-semibold transition-all duration-200"
           >
             <Zap className="w-4 h-4 text-violet-600 dark:text-violet-400" />
             <span>{showStackDrawer ? 'Hide environment details' : 'What I use to build daily'}</span>

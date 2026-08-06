@@ -199,7 +199,7 @@ export function ExperienceTimeline() {
                   <button
                     disabled={activeStep === 0}
                     onClick={() => setActiveStep((prev) => Math.max(0, prev - 1))}
-                    className="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] text-xs font-semibold text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/[0.06] transition-colors"
+                    className="px-4 py-2 rounded-md bg-white/[0.03] border border-white/[0.06] text-xs font-semibold text-stone-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-white/[0.06] transition-colors"
                   >
                     ← Previous
                   </button>
@@ -216,7 +216,7 @@ export function ExperienceTimeline() {
                   <button
                     disabled={activeStep === howIWork.length - 1}
                     onClick={() => setActiveStep((prev) => Math.min(howIWork.length - 1, prev + 1))}
-                    className="px-4 py-2 rounded-full bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold shadow-lg shadow-violet-600/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
+                    className="px-4 py-2 rounded-md bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold shadow-lg shadow-violet-600/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-1"
                   >
                     <span>Next</span>
                     <ArrowRight className="w-3.5 h-3.5 text-white" />

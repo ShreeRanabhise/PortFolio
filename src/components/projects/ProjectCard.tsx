@@ -142,7 +142,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-stone-500 hover:text-white hover:border-violet-500/30 transition-all duration-200 min-h-[36px] min-w-[36px] flex items-center justify-center"
+              className="p-2 rounded-md bg-white/[0.03] border border-white/[0.06] text-stone-500 hover:text-white hover:border-violet-500/30 transition-all duration-200 min-h-[36px] min-w-[36px] flex items-center justify-center"
               aria-label={`View ${project.title} GitHub Repository`}
             >
               <Github className="w-4 h-4" />
@@ -153,7 +153,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-stone-500 hover:text-white hover:border-violet-500/30 transition-all duration-200 min-h-[36px] min-w-[36px] flex items-center justify-center"
+              className="p-2 rounded-md bg-white/[0.03] border border-white/[0.06] text-stone-500 hover:text-white hover:border-violet-500/30 transition-all duration-200 min-h-[36px] min-w-[36px] flex items-center justify-center"
               aria-label={`Visit ${project.title} Live Website`}
             >
               <ExternalLink className="w-4 h-4" />

@@ -183,7 +183,7 @@ export function ContactSection() {
                 <div className="pt-2">
                   <a
                     href={`mailto:${personalInfo.email}?subject=Request%20for%20Resume`}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold shadow-lg shadow-violet-600/25 transition-all duration-200 active:scale-[0.98]"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-violet-600 hover:bg-violet-500 text-white text-sm font-bold shadow-lg shadow-violet-600/25 transition-all duration-200 active:scale-[0.98]"
                   >
                     <Download className="w-4 h-4 text-white" />
                     <span>Download Resume (PDF)</span>
@@ -219,7 +219,7 @@ export function ContactSection() {
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
-                    className="mt-4 px-4 py-2 rounded-full bg-violet-600/10 dark:bg-violet-500/10 border border-violet-500/20 text-violet-700 dark:text-violet-300 text-xs font-semibold hover:bg-violet-600/20 transition-colors duration-200"
+                    className="mt-4 px-4 py-2 rounded-md bg-violet-600/10 dark:bg-violet-500/10 border border-violet-500/20 text-violet-700 dark:text-violet-300 text-xs font-semibold hover:bg-violet-600/20 transition-colors duration-200"
                   >
                     Send Another Message
                   </button>
@@ -235,7 +235,7 @@ export function ContactSection() {
                         placeholder="John Doe"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border ${
+                        className={`w-full px-4 py-3 rounded-md bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border ${
                           errors.name ? 'border-rose-500/50' : 'border-slate-200/80 dark:border-white/[0.06]'
                         } focus:outline-none focus:border-violet-500 dark:focus:border-violet-500/50 transition-all duration-200 placeholder:text-slate-400 dark:placeholder:text-stone-600`}
                       />
@@ -250,7 +250,7 @@ export function ContactSection() {
                         placeholder="john@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border ${
+                        className={`w-full px-4 py-3 rounded-md bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border ${
                           errors.email ? 'border-rose-500/50' : 'border-slate-200/80 dark:border-white/[0.06]'
                         } focus:outline-none focus:border-violet-500 dark:focus:border-violet-500/50 transition-all duration-200 placeholder:text-slate-400 dark:placeholder:text-stone-600`}
                       />
@@ -266,7 +266,7 @@ export function ContactSection() {
                       placeholder="Full-Stack Engineering Opportunity"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border border-slate-200/80 dark:border-white/[0.06] focus:outline-none focus:border-violet-500 dark:focus:border-violet-500/50 transition-all duration-200 placeholder:text-slate-400 dark:placeholder:text-stone-600"
+                      className="w-full px-4 py-3 rounded-md bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border border-slate-200/80 dark:border-white/[0.06] focus:outline-none focus:border-violet-500 dark:focus:border-violet-500/50 transition-all duration-200 placeholder:text-slate-400 dark:placeholder:text-stone-600"
                     />
                   </div>
 
@@ -278,7 +278,7 @@ export function ContactSection() {
                       placeholder="Tell me about your project goals or team needs..."
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className={`w-full px-4 py-3 rounded-xl bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border ${
+                      className={`w-full px-4 py-3 rounded-md bg-white dark:bg-white/[0.02] text-slate-900 dark:text-white text-sm border ${
                         errors.message ? 'border-rose-500/50' : 'border-slate-200/80 dark:border-white/[0.06]'
                       } focus:outline-none focus:border-violet-500 dark:focus:border-violet-500/50 transition-all duration-200 resize-none placeholder:text-slate-400 dark:placeholder:text-stone-600`}
                     />
@@ -288,7 +288,7 @@ export function ContactSection() {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm shadow-lg shadow-violet-600/25 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm shadow-lg shadow-violet-600/25 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-4 h-4 text-white" />
                     <span>{status === 'submitting' ? 'Sending...' : 'Send Message'}</span>

@@ -131,7 +131,7 @@ export function Hero() {
           <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-1">
             <Link
               href="#projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm shadow-lg shadow-violet-600/25 transition-all duration-200 hover:shadow-violet-500/40 active:scale-[0.97]"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-md bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm shadow-lg shadow-violet-600/25 transition-all duration-200 hover:shadow-violet-500/40 active:scale-[0.97]"
             >
               <span>View projects</span>
               <ArrowRight className="w-4 h-4" />
@@ -139,7 +139,7 @@ export function Hero() {
 
             <Link
               href="#contact"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/80 dark:bg-transparent border border-slate-300/80 dark:border-white/10 hover:border-violet-500/50 text-slate-800 dark:text-stone-300 hover:text-slate-950 dark:hover:text-white font-semibold text-sm transition-all duration-200 group shadow-sm dark:shadow-none"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-md bg-white/80 dark:bg-transparent border border-slate-300/80 dark:border-white/10 hover:border-violet-500/50 text-slate-800 dark:text-stone-300 hover:text-slate-950 dark:hover:text-white font-semibold text-sm transition-all duration-200 group shadow-sm dark:shadow-none"
             >
               <span>Contact me</span>
               <ArrowRight className="w-4 h-4 text-violet-600 dark:text-violet-400 group-hover:translate-x-1 transition-transform duration-200" />

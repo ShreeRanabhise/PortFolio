@@ -123,7 +123,7 @@ export function Navbar() {
               href="/"
               className="group flex items-center gap-3 text-slate-900 dark:text-white font-medium tracking-tight shrink-0"
             >
-              <div className="w-9 h-9 rounded-xl bg-violet-600 flex items-center justify-center font-bold text-white text-xs shadow-lg shadow-violet-600/20 group-hover:scale-105 transition-transform duration-200">
+              <div className="w-9 h-9 rounded-md bg-violet-600 flex items-center justify-center font-bold text-white text-xs shadow-lg shadow-violet-600/20 group-hover:scale-105 transition-transform duration-200">
                 SR
               </div>
               <div className="flex flex-col">
@@ -262,7 +262,7 @@ export function Navbar() {
 
               <a
                 href="#contact"
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-violet-600/10 dark:bg-transparent border border-violet-500/40 text-violet-700 dark:text-violet-300 hover:text-white hover:bg-violet-600 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-violet-600/10 dark:bg-transparent border border-violet-500/40 text-violet-700 dark:text-violet-300 hover:text-white hover:bg-violet-600 text-xs font-bold transition-all duration-200 hover:scale-105 active:scale-95"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>Resume</span>
@@ -275,7 +275,7 @@ export function Navbar() {
 
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="p-2 rounded-xl bg-slate-200/80 dark:bg-white/[0.03] border border-slate-300/60 dark:border-white/[0.06] text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white transition-colors duration-200"
+                className="p-2 rounded-md bg-slate-200/80 dark:bg-white/[0.03] border border-slate-300/60 dark:border-white/[0.06] text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white transition-colors duration-200"
                 aria-label="Toggle Mobile Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

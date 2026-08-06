@@ -149,7 +149,7 @@ export function ProjectsSection() {
                 <div className="flex flex-wrap items-center gap-4 pt-2">
                   <Link
                     href={`/projects/${featuredProject.slug}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/25 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/25 transition-all"
                   >
                     <span>Read Full Case Study</span>
                     <ArrowRight className="w-4 h-4" />
@@ -160,7 +160,7 @@ export function ProjectsSection() {
                       href={featuredProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white dark:bg-transparent border border-slate-300 dark:border-white/10 hover:border-indigo-500/40 text-slate-800 dark:text-stone-300 hover:text-slate-950 dark:hover:text-white font-semibold text-xs transition-all"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white dark:bg-transparent border border-slate-300 dark:border-white/10 hover:border-indigo-500/40 text-slate-800 dark:text-stone-300 hover:text-slate-950 dark:hover:text-white font-semibold text-xs transition-all"
                     >
                       <span>Live App</span>
                       <ExternalLink className="w-3.5 h-3.5" />
