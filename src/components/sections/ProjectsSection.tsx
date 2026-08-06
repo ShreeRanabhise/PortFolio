@@ -7,6 +7,7 @@ import { projects } from '@/data/portfolioData';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import Link from 'next/link';
 import { ArrowRight, ExternalLink, Layout, ShoppingCart, Database } from 'lucide-react';
+import { Counter } from '@/components/ui/Counter';
 
 const Project3DCanvas = dynamic(() => import('@/components/webgl/Project3DCanvas'), {
   ssr: false,
@@ -125,7 +126,7 @@ export function ProjectsSection() {
                   <div className="grid grid-cols-3 gap-4 py-4 border-y border-indigo-100 dark:border-white/[0.06]">
                     {featuredProject.stats.map((m, idx) => (
                       <div key={idx}>
-                        <div className="text-lg sm:text-xl font-extrabold text-indigo-600 dark:text-violet-400">{m.value}</div>
+                        <Counter value={m.value} className="text-lg sm:text-xl font-extrabold text-indigo-600 dark:text-violet-400 block" />
                         <div className="text-[11px] text-slate-600 dark:text-stone-400 font-medium truncate">{m.label}</div>
                       </div>
                     ))}

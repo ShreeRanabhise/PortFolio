@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, ArrowRight, ShoppingBag, Server, CheckCircle2, Layout } from 'lucide-react';
 import { Project } from '@/types/portfolio';
+import { Counter } from '@/components/ui/Counter';
 
 const Project3DCanvas = dynamic(() => import('@/components/webgl/Project3DCanvas'), {
   ssr: false,
@@ -86,7 +87,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               {project.stats.map((s, i) => (
                 <span key={i} className="flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/70" />
-                  <strong className="text-stone-300">{s.label}:</strong> {s.value}
+                  <strong className="text-stone-300">{s.label}:</strong> <Counter value={s.value} />
                 </span>
               ))}
             </div>

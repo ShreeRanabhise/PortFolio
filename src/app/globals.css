@@ -4,70 +4,40 @@
 
 @layer base {
   :root {
-    --bg-main: #fcfbf9;
+    --bg-main: #f8fafc;
     --bg-surface: #ffffff;
-    --bg-subtle: #f4f1ea;
-    --bg-dark-hero: #090b10;
-    --bg-dark-card: #121520;
-    --border-subtle: rgba(226, 220, 208, 0.6);
-    --border-strong: rgba(210, 202, 188, 0.9);
-    --text-primary: #11141a;
-    --text-secondary: #3b4252;
-    --text-muted: #6b7280;
+    --bg-subtle: #f1f5f9;
+    --bg-dark-hero: #07090e;
+    --bg-dark-card: #0d1017;
+    --border-subtle: rgba(226, 232, 240, 0.8);
+    --border-strong: rgba(203, 213, 225, 0.9);
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
 
-    /* Cinematic Accents */
-    --accent-violet: #8b5cf6;
-    --accent-coral: #ff6b6b;
-    --accent-indigo: #6366f1;
-    --accent-peach: #f97316;
-    --accent-mint: #10b981;
-
-    --mist-bg: rgba(224, 242, 254, 0.6);
-    --mist-border: rgba(186, 230, 253, 0.8);
-    --mist-text: #0284c7;
-
-    --lavender-bg: rgba(243, 232, 255, 0.6);
-    --lavender-border: rgba(233, 213, 255, 0.8);
-    --lavender-text: #7e22ce;
-
-    --sage-bg: rgba(220, 252, 231, 0.6);
-    --sage-border: rgba(187, 247, 208, 0.8);
-    --sage-text: #15803d;
-
-    --peach-bg: rgba(255, 237, 213, 0.6);
-    --peach-border: rgba(254, 215, 170, 0.8);
-    --peach-text: #c2410c;
+    /* Single Primary Accent System (Violet/Indigo) */
+    --accent-violet: #7c3aed;
+    --accent-indigo: #4f46e5;
+    --accent-glow: rgba(124, 58, 237, 0.15);
 
     --ease-out-cubic: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dark {
-    --bg-main: #0b0e14;
-    --bg-surface: #121622;
-    --bg-subtle: #1a202c;
+    --bg-main: #07090e;
+    --bg-surface: #0d1017;
+    --bg-subtle: #121622;
     --bg-dark-hero: #07090e;
-    --bg-dark-card: #141824;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.16);
+    --bg-dark-card: #0d1017;
+    --border-subtle: rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.14);
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
 
-    --mist-bg: rgba(56, 189, 248, 0.12);
-    --mist-border: rgba(56, 189, 248, 0.25);
-    --mist-text: #38bdf8;
-
-    --lavender-bg: rgba(167, 139, 250, 0.12);
-    --lavender-border: rgba(167, 139, 250, 0.25);
-    --lavender-text: #c084fc;
-
-    --sage-bg: rgba(74, 222, 128, 0.12);
-    --sage-border: rgba(74, 222, 128, 0.25);
-    --sage-text: #4ade80;
-
-    --peach-bg: rgba(251, 146, 60, 0.12);
-    --peach-border: rgba(251, 146, 60, 0.25);
-    --peach-text: #fb923c;
+    --accent-violet: #a78bfa;
+    --accent-indigo: #818cf8;
+    --accent-glow: rgba(167, 139, 250, 0.15);
   }
 }
 
