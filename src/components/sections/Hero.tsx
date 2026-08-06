@@ -166,10 +166,10 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Right column: Refined Medium Profile Card */}
+        {/* Right column: Refined Profile Card */}
         <motion.div
           variants={itemVariants}
-          className="lg:col-span-5 relative flex justify-center lg:justify-end"
+          className="lg:col-span-5 relative flex justify-center lg:justify-end mt-4 lg:mt-0"
           ref={cardRef}
           style={{
             x: cardX,
@@ -177,12 +177,12 @@ export function Hero() {
           }}
         >
           {/* Ambient Glow */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/20 via-indigo-600/10 to-transparent rounded-3xl blur-[50px] pointer-events-none transform-gpu" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/20 via-indigo-600/10 to-transparent rounded-none blur-[40px] pointer-events-none transform-gpu" />
 
           {/* Card Frame */}
-          <div className="relative w-full max-w-[320px] sm:max-w-[340px] rounded-2xl bg-white/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.08] p-4 shadow-2xl backdrop-blur-md overflow-hidden group">
+          <div className="relative w-full max-w-[280px] xs:max-w-[310px] sm:max-w-[340px] rounded-none bg-white/80 dark:bg-[#0d1017]/90 border border-slate-200 dark:border-white/[0.08] p-3.5 sm:p-4 shadow-2xl backdrop-blur-md overflow-hidden group">
             {/* Terminal Window Chrome */}
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/[0.06] mb-3">
+            <div className="flex items-center justify-between pb-2.5 border-b border-slate-200 dark:border-white/[0.06] mb-3">
               <div className="flex items-center gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-violet-500/70" />
                 <div className="w-2.5 h-2.5 rounded-full bg-violet-500/50" />
@@ -195,19 +195,19 @@ export function Hero() {
             </div>
 
             {/* Medium Portrait Container */}
-            <div className="relative aspect-[4/4.5] w-full rounded-xl overflow-hidden border border-white/[0.08] bg-[#0d1017]">
+            <div className="relative aspect-square sm:aspect-[4/4.5] w-full rounded-none overflow-hidden border border-white/[0.08] bg-[#07090e]">
               <Image
                 src="/images/shree-profile.jpg"
                 alt="Shree Ranabhise"
                 fill
                 priority
-                sizes="340px"
+                sizes="(max-width: 640px) 280px, 340px"
                 className="object-cover object-top group-hover:scale-105 transition-transform duration-500 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#090b10]/90 via-transparent to-transparent pointer-events-none" />
 
               {/* Glass Badge Overlay */}
-              <div className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-[#090b10]/80 border border-white/[0.08] backdrop-blur-md">
+              <div className="absolute bottom-2.5 left-2.5 right-2.5 p-2.5 sm:p-3 rounded-none bg-[#090b10]/85 border border-white/[0.08] backdrop-blur-md">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-white">{personalInfo.name}</span>
                   <span className="flex h-2 w-2 relative">
@@ -215,28 +215,28 @@ export function Hero() {
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-violet-400" />
                   </span>
                 </div>
-                <span className="text-[11px] font-mono text-violet-300 font-semibold block mt-0.5">{personalInfo.role}</span>
+                <span className="text-[10px] sm:text-[11px] font-mono text-violet-300 font-semibold block mt-0.5">{personalInfo.role}</span>
               </div>
             </div>
 
             {/* Bottom Quick Stack Badges */}
             <div className="pt-3 grid grid-cols-2 gap-2">
-              <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.06] flex items-center gap-2">
-                <div className="p-1.5 rounded bg-violet-500/10 text-violet-400">
-                  <Code className="w-3.5 h-3.5 text-violet-400" />
+              <div className="p-2 rounded-none bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] flex items-center gap-2">
+                <div className="p-1.5 rounded-none bg-violet-500/10 text-violet-400">
+                  <Code className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[10px] font-bold text-white truncate">Full-Stack</div>
-                  <div className="text-[8.5px] text-stone-500 font-mono truncate">Next.js · TS</div>
+                  <div className="text-[10px] font-bold text-slate-900 dark:text-white truncate">Full-Stack</div>
+                  <div className="text-[8.5px] text-slate-500 dark:text-stone-500 font-mono truncate">Next.js · TS</div>
                 </div>
               </div>
-              <div className="p-2 rounded-lg bg-white/[0.02] border border-white/[0.06] flex items-center gap-2">
-                <div className="p-1.5 rounded bg-violet-500/10 text-violet-400">
-                  <Cpu className="w-3.5 h-3.5 text-violet-400" />
+              <div className="p-2 rounded-none bg-slate-100/80 dark:bg-white/[0.02] border border-slate-200 dark:border-white/[0.06] flex items-center gap-2">
+                <div className="p-1.5 rounded-none bg-violet-500/10 text-violet-400">
+                  <Cpu className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400" />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-[10px] font-bold text-white truncate">AI Architect</div>
-                  <div className="text-[8.5px] text-stone-500 font-mono truncate">UI Workflows</div>
+                  <div className="text-[10px] font-bold text-slate-900 dark:text-white truncate">AI Architect</div>
+                  <div className="text-[8.5px] text-slate-500 dark:text-stone-500 font-mono truncate">UI Workflows</div>
                 </div>
               </div>
             </div>
