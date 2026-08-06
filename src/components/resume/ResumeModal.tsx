@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FileText, X, Download, Printer, Mail, Phone, MapPin, ExternalLink, Calendar, Award } from 'lucide-react';
+import { FileText, X, Printer, Mail, Phone, MapPin } from 'lucide-react';
 import { personalInfo, timelineData, certificatesData, projects } from '@/data/portfolioData';
 
 export function ResumeModal() {

@@ -1,163 +1,163 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
+import { ExternalLink, Github, ArrowRight, ShoppingBag, Server, CheckCircle2, Layout } from 'lucide-react';
 import { Project } from '@/types/portfolio';
-import { Badge } from '@/components/ui/Badge';
-import { ExternalLink, Github, ArrowRight, Layout, ShoppingCart, Database } from 'lucide-react';
-import Image from 'next/image';
+
+const Project3DCanvas = dynamic(() => import('@/components/webgl/Project3DCanvas'), {
+  ssr: false,
+});
 
 interface ProjectCardProps {
   project: Project;
+  isFeatured?: boolean;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
-  const mockupIcons = {
-    dashboard: Layout,
-    ecommerce: ShoppingCart,
-    erp: Database,
-  };
+export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
 
-  const MockupIcon = mockupIcons[project.imagePlaceholder.mockupType] || Layout;
-
-  const accentBadgeVariants: Record<string, 'mist' | 'sage' | 'lavender'> = {
-    mist: 'mist',
-    sage: 'sage',
-    lavender: 'lavender',
+  const getBadgeIcon = (mockupType: string) => {
+    switch (mockupType) {
+      case 'dashboard': return <Layout className="w-4 h-4 text-violet-400" />;
+      case 'ecommerce': return <ShoppingBag className="w-4 h-4 text-violet-400" />;
+      case 'erp': return <Server className="w-4 h-4 text-violet-400" />;
+      default: return <Layout className="w-4 h-4 text-violet-400" />;
+    }
   };
 
   return (
     <motion.div
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-      className="group flex flex-col justify-between rounded-3xl bg-white/70 dark:bg-stone-900/60 border border-stone-200/60 dark:border-white/[0.08] backdrop-blur-md shadow-2xs hover:shadow-md hover:border-sky-300/80 dark:hover:border-sky-800/60 overflow-hidden transition-all duration-300"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      whileHover={{ y: -6, scale: 1.02 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`group relative rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:border-violet-500/30 shadow-lg overflow-hidden flex flex-col justify-between transition-all duration-300 ${
+        isFeatured ? 'lg:col-span-2' : ''
+      }`}
     >
-      {/* Top Banner / Visual Architecture Preview Image */}
-      <a
-        href={project.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-cursor="view"
-        title={`Open live site for ${project.title}`}
-        className="relative h-48 w-full bg-stone-950 p-4 flex flex-col justify-between overflow-hidden cursor-pointer block group/preview"
-      >
-        {project.previewImage ? (
-          <>
-            <Image
-              src={project.previewImage}
-              alt={`${project.title} Visual Architecture Preview`}
-              fill
-              sizes="(max-width: 768px) 100vw, 400px"
-              className="object-cover object-top group-hover/preview:scale-105 transition-transform duration-500 opacity-90 group-hover/preview:opacity-100"
-            />
-            {/* Top Badge Overlay */}
-            <div className="relative z-10 flex items-center justify-between">
-              <Badge variant={accentBadgeVariants[project.imagePlaceholder.accentColor] || 'mist'}>
-                {project.imagePlaceholder.badgeText}
-              </Badge>
+      <div>
+        {/* Visual preview area with 3D WebGL background */}
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br from-[#0d1017] via-[#0f1218] to-[#0d1017] p-6 flex flex-col justify-between border-b border-white/[0.06]">
+          {/* WebGL 3D Canvas */}
+          <Project3DCanvas
+            mockupType={project.imagePlaceholder.mockupType}
+            isHovered={isHovered}
+            className="absolute inset-0 z-0 opacity-80"
+          />
 
-              <div className="flex items-center gap-2">
-                {project.featured && (
-                  <span className="px-2.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase bg-amber-100/90 text-amber-900 dark:bg-amber-950/90 dark:text-amber-300 rounded-full border border-amber-200 dark:border-amber-800/60 backdrop-blur-xs">
-                    Featured
-                  </span>
-                )}
-                <span className="p-1.5 rounded-full bg-stone-900/80 text-white border border-stone-700/80 backdrop-blur-md opacity-80 group-hover/preview:opacity-100 group-hover/preview:scale-110 transition-all">
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </div>
-            {/* Bottom Gradient Fade & Hover Redirect Hint */}
-            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-stone-950/90 via-stone-950/40 to-transparent flex items-end justify-between p-3.5 z-10">
-              <span className="text-[11px] font-semibold text-white/90 group-hover/preview:text-sky-300 flex items-center gap-1 transition-colors">
-                Live Preview <ExternalLink className="w-3 h-3" />
-              </span>
-              <span className="text-[10px] font-mono text-stone-300/80 opacity-0 group-hover/preview:opacity-100 transition-opacity">
-                Click to Open ↗
-              </span>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-sky-200/30 dark:bg-sky-900/20 blur-xl group-hover/preview:scale-125 transition-transform" />
-            <div className="flex items-center justify-between z-10">
-              <Badge variant={accentBadgeVariants[project.imagePlaceholder.accentColor] || 'mist'}>
-                {project.imagePlaceholder.badgeText}
-              </Badge>
-              {project.featured && (
-                <span className="px-2.5 py-0.5 text-[10px] font-semibold tracking-wide uppercase bg-amber-100 text-amber-900 dark:bg-amber-950/80 dark:text-amber-300 rounded-full border border-amber-200 dark:border-amber-800/60">
-                  Featured
-                </span>
-              )}
-            </div>
-            <div className="self-center flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 z-10 my-auto group-hover/preview:scale-105 transition-transform">
-              <div className="w-12 h-12 rounded-2xl bg-white/80 dark:bg-stone-800/80 border border-stone-200/70 dark:border-stone-700/60 flex items-center justify-center text-stone-700 dark:text-stone-300 shadow-xs mb-2">
-                <MockupIcon className="w-6 h-6" />
-              </div>
-              <span className="text-[11px] font-medium tracking-wider uppercase text-stone-400 dark:text-stone-500">
-                {project.category}
-              </span>
-            </div>
-          </>
-        )}
-      </a>
+          {/* Subtle grid bg */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:2rem_2rem] pointer-events-none" />
 
-      {/* Content Body */}
-      <div className="p-6 flex flex-col flex-grow justify-between gap-5">
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-stone-900 dark:text-stone-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors tracking-tight">
-              {project.title}
-            </h3>
+          {/* Featured badge */}
+          {isFeatured && (
+            <div className="absolute top-4 right-4 z-20 px-2.5 py-1 rounded-full bg-violet-600 text-[10px] font-bold text-white uppercase tracking-wider">
+              Featured
+            </div>
+          )}
+
+          {/* Badge & category header */}
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-[11px] font-semibold text-stone-300 backdrop-blur-sm">
+              {getBadgeIcon(project.imagePlaceholder.mockupType)}
+              <span>{project.imagePlaceholder.badgeText}</span>
+            </span>
+            <span className="text-[10px] font-mono text-stone-500 uppercase tracking-wider">
+              {project.category}
+            </span>
           </div>
 
-          <p className="text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed line-clamp-3 font-normal">
-            {project.shortDescription}
-          </p>
+          {/* Center mockup */}
+          <div className="relative z-10 my-auto py-6 text-center space-y-2 group-hover:scale-[1.03] transition-transform duration-300">
+            <div className="inline-block p-4 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white backdrop-blur-sm">
+              <h4 className="text-xl font-extrabold text-white tracking-tight">{project.title}</h4>
+              <p className="text-xs text-violet-300/80 font-mono mt-1">{project.shortDescription.slice(0, 70)}...</p>
+            </div>
+          </div>
+
+          {/* Bottom preview metrics */}
+          {project.stats && (
+            <div className="relative z-10 flex items-center gap-4 text-xs font-mono text-stone-500 pt-2">
+              {project.stats.map((s, i) => (
+                <span key={i} className="flex items-center gap-1">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400/70" />
+                  <strong className="text-stone-300">{s.label}:</strong> {s.value}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Tech Stack Chips */}
-        <div className="flex flex-wrap gap-1.5 pt-1">
-          {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="px-2.5 py-1 rounded-xl bg-stone-100/60 dark:bg-stone-800/50 text-[11px] font-semibold text-stone-700 dark:text-stone-300 border border-stone-200/50 dark:border-white/[0.06]"
-            >
-              {tech}
-            </span>
-          ))}
+        {/* Content body */}
+        <div className="p-6 space-y-4">
+          <div className="space-y-1.5">
+            <h3 className="text-xl font-bold text-white group-hover:text-violet-300 transition-colors duration-200 flex items-center justify-between">
+              <span>{project.title}</span>
+              <ArrowRight className="w-5 h-5 text-stone-600 group-hover:text-violet-400 group-hover:translate-x-1 transition-all duration-200" />
+            </h3>
+            <p className="text-sm text-stone-400 leading-relaxed">
+              {project.shortDescription}
+            </p>
+          </div>
+
+          {/* Outcome */}
+          <div className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] text-xs text-stone-400">
+            <strong className="text-violet-400 font-semibold">Outcome: </strong>
+            {project.outcome}
+          </div>
+
+          {/* Tech stack pills */}
+          <div className="flex flex-wrap gap-1.5 pt-1">
+            {project.techStack.map((tech) => (
+              <span
+                key={tech}
+                className="px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] text-[10px] font-mono text-stone-400 group-hover:text-stone-300 group-hover:border-violet-500/20 transition-all duration-200"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
+      </div>
 
-        {/* Bottom CTA Links */}
-        <div className="pt-4 border-t border-stone-200/40 dark:border-white/[0.06] flex items-center justify-between">
-          <Link
-            href={`/projects/${project.slug}`}
-            className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-bold text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-200 group/link"
-          >
-            <span>View Case Study</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-0.5 transition-transform" />
-          </Link>
+      {/* Footer actions */}
+      <div className="px-6 pb-6 pt-2 flex items-center justify-between gap-3 border-t border-white/[0.06] mt-auto">
+        <Link
+          href={`/projects/${project.slug}`}
+          className="inline-flex items-center gap-1.5 text-xs font-bold text-violet-400 hover:text-violet-300 transition-colors duration-200"
+        >
+          <span>View Case Study</span>
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
+        </Link>
 
-          <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
+          {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`GitHub repository for ${project.title}`}
-              className="min-w-[44px] min-h-[44px] p-2 rounded-xl text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-center transition-colors active:scale-95"
+              className="p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-stone-500 hover:text-white hover:border-violet-500/30 transition-all duration-200 min-h-[36px] min-w-[36px] flex items-center justify-center"
+              aria-label={`View ${project.title} GitHub Repository`}
             >
               <Github className="w-4 h-4" />
             </a>
+          )}
+          {project.liveUrl && (
             <a
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Live demo for ${project.title}`}
-              className="min-w-[44px] min-h-[44px] p-2 rounded-xl text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100 hover:bg-stone-200/50 dark:hover:bg-stone-800/50 flex items-center justify-center transition-colors active:scale-95"
+              className="p-2 rounded-xl bg-white/[0.03] border border-white/[0.06] text-stone-500 hover:text-white hover:border-violet-500/30 transition-all duration-200 min-h-[36px] min-w-[36px] flex items-center justify-center"
+              aria-label={`Visit ${project.title} Live Website`}
             >
               <ExternalLink className="w-4 h-4" />
             </a>
-          </div>
+          )}
         </div>
       </div>
     </motion.div>

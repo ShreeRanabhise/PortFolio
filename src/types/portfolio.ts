@@ -11,6 +11,7 @@ export interface PersonalInfo {
   availability: string;
   collaborationStatus: string;
   outcomesStatement: string;
+  specialties: string[];
   languages: Array<{
     language: string;
     proficiency: string;
@@ -23,6 +24,14 @@ export interface PersonalInfo {
   }>;
 }
 
+export interface ProofMetric {
+  id: string;
+  value: string;
+  label: string;
+  sublabel: string;
+  iconName: string;
+}
+
 export interface Certificate {
   title: string;
   issuer: string;
@@ -30,7 +39,14 @@ export interface Certificate {
   skills: string[];
 }
 
-export type SkillCategoryType = 'Frontend' | 'Frontend & SEO' | 'Backend' | 'Design & UI/UX' | 'Tools & Cloud' | 'SEO & Web Performance' | 'AI & Methods' | string;
+export type SkillCategoryType =
+  | 'Frontend & SEO'
+  | 'Backend'
+  | 'Design & UI/UX'
+  | 'Tools & Cloud'
+  | 'SEO & Web Performance'
+  | 'AI & Methods'
+  | string;
 
 export interface SkillCategory {
   category: SkillCategoryType;
@@ -43,9 +59,11 @@ export interface SkillCategory {
 }
 
 export interface HowIWorkItem {
+  step: string;
   title: string;
   description: string;
   icon: string;
+  details?: string[];
 }
 
 export interface Project {
@@ -69,6 +87,12 @@ export interface Project {
   approach: string[];
   impactHighlights: string[];
   lessonsLearned: string[];
+  role?: string;
+  period?: string;
+  stats?: Array<{
+    label: string;
+    value: string;
+  }>;
 }
 
 export interface TimelineEntry {
@@ -92,4 +116,20 @@ export interface AIResponseOption {
   relatedProjectSlug?: string;
   actionText?: string;
   actionUrl?: string;
+}
+
+export interface CommandItem {
+  id: string;
+  title: string;
+  category: 'Navigation' | 'Projects' | 'Actions' | 'Skills';
+  href: string;
+  icon: string;
+  keywords?: string[];
+}
+
+export interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  category?: string;
 }

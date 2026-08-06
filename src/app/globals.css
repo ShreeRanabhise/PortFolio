@@ -4,16 +4,24 @@
 
 @layer base {
   :root {
-    --bg-main: #faf9f5;
+    --bg-main: #fcfbf9;
     --bg-surface: #ffffff;
     --bg-subtle: #f4f1ea;
-    --border-subtle: rgba(226, 220, 208, 0.55);
-    --border-strong: rgba(210, 202, 188, 0.85);
-    --text-primary: #18181b;
-    --text-secondary: #3f3f46;
-    --text-muted: #71717a;
+    --bg-dark-hero: #090b10;
+    --bg-dark-card: #121520;
+    --border-subtle: rgba(226, 220, 208, 0.6);
+    --border-strong: rgba(210, 202, 188, 0.9);
+    --text-primary: #11141a;
+    --text-secondary: #3b4252;
+    --text-muted: #6b7280;
 
-    /* Restrained Accents */
+    /* Cinematic Accents */
+    --accent-violet: #8b5cf6;
+    --accent-coral: #ff6b6b;
+    --accent-indigo: #6366f1;
+    --accent-peach: #f97316;
+    --accent-mint: #10b981;
+
     --mist-bg: rgba(224, 242, 254, 0.6);
     --mist-border: rgba(186, 230, 253, 0.8);
     --mist-text: #0284c7;
@@ -30,16 +38,17 @@
     --peach-border: rgba(254, 215, 170, 0.8);
     --peach-text: #c2410c;
 
-    /* Motion Tokens */
     --ease-out-cubic: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .dark {
-    --bg-main: #0c0f16;
-    --bg-surface: #141824;
-    --bg-subtle: #1c2232;
-    --border-subtle: rgba(255, 255, 255, 0.07);
-    --border-strong: rgba(255, 255, 255, 0.14);
+    --bg-main: #0b0e14;
+    --bg-surface: #121622;
+    --bg-subtle: #1a202c;
+    --bg-dark-hero: #07090e;
+    --bg-dark-card: #141824;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-strong: rgba(255, 255, 255, 0.16);
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
     --text-muted: #94a3b8;
@@ -78,19 +87,39 @@ body {
   overflow-x: clip;
 }
 
-/* Subtle imperceptible noise overlay */
+/* Ticker Marquee Animation for Specialty Rail */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Imperceptible noise overlay */
 .bg-grain {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
 }
 
 /* Accessible focus ring */
 :focus-visible {
-  outline: 2px solid #0284c7;
+  outline: 2px solid #8b5cf6;
   outline-offset: 2px;
 }
 
 .dark :focus-visible {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #a855f7;
   outline-offset: 2px;
 }
 
@@ -122,5 +151,8 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
 }
-
