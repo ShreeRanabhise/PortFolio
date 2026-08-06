@@ -9,20 +9,27 @@ import { HeroScene } from './HeroScene';
 
 /**
  * Enhanced WebGL Canvas container for the Hero section.
- * Features: adaptive quality tiering (HIGH/LOW), low-power GPU preference,
- * DPR capping [1, 1.5], context loss recovery, tab visibility pausing, and
- * prefers-reduced-motion accessibility support.
+ * Features: mobile viewport detection & mesh scaling, adaptive quality tiering (HIGH/LOW),
+ * low-power GPU preference, DPR capping [1, 1.5], context loss recovery, tab visibility pausing,
+ * and prefers-reduced-motion accessibility support.
  */
 export function HeroCanvas() {
   const [mounted, setMounted] = useState(false);
   const [isContextLost, setIsContextLost] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { theme, resolvedTheme } = useTheme();
   const { isSupported, isReducedMotion, isChecked } = useWebGLSupport();
 
   useEffect(() => {
     setMounted(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   // Detect Quality Tier based on hardwareConcurrency
@@ -75,7 +82,7 @@ export function HeroCanvas() {
   return (
     <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden" aria-hidden="true">
       <Canvas
-        camera={{ position: [0, 0, 8], fov: 45 }}
+        camera={{ position: [0, 0, isMobile ? 6.5 : 8], fov: 45 }}
         dpr={[1, 1.5]}
         gl={{
           antialias: true,
@@ -92,6 +99,7 @@ export function HeroCanvas() {
           isReducedMotion={isReducedMotion}
           theme={activeTheme}
           qualityTier={qualityTier}
+          isMobile={isMobile}
         />
       </Canvas>
     </div>

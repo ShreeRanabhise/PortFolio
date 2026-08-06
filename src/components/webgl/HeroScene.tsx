@@ -8,15 +8,19 @@ interface HeroSceneProps {
   isReducedMotion?: boolean;
   theme?: string;
   qualityTier?: 'high' | 'low';
+  isMobile?: boolean;
 }
 
 /**
  * Enhanced 3D Architectural Core & Layered Constellation Particles.
- * Uses meshPhysicalMaterial clearcoat for fresnel edge highlights,
- * multi-depth particle layers with differential parallax rates,
- * and adaptive quality tiering for mobile safety.
+ * Mobile-optimised with proportional mesh & particle scaling when isMobile=true.
  */
-export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier = 'high' }: HeroSceneProps) {
+export function HeroScene({
+  isReducedMotion = false,
+  theme = 'dark',
+  qualityTier = 'high',
+  isMobile = false,
+}: HeroSceneProps) {
   const coreMeshRef = useRef<THREE.Mesh>(null);
   const innerCoreRef = useRef<THREE.Mesh>(null);
   const outerRingRef = useRef<THREE.Mesh>(null);
@@ -28,16 +32,15 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
   const isHighQuality = qualityTier === 'high';
 
   // Palette tokens
-  const primaryColor = isDark ? '#a78bfa' : '#6366f1'; // violet-400 : indigo-500
-  const wireframeColor = isDark ? '#818cf8' : '#4f46e5'; // indigo-400 : indigo-600
-  const particleColorNear = isDark ? '#c084fc' : '#818cf8'; // purple-400 : indigo-400
-  const particleColorFar = isDark ? '#7c3aed' : '#4f46e5'; // violet-600 : indigo-600
+  const primaryColor = isDark ? '#a78bfa' : '#6366f1';
+  const wireframeColor = isDark ? '#818cf8' : '#4f46e5';
+  const particleColorNear = isDark ? '#c084fc' : '#818cf8';
+  const particleColorFar = isDark ? '#7c3aed' : '#4f46e5';
 
-  // High-tier gets 240 particles split across 2 depth layers, Low-tier gets 90 particles
-  const particleCountNear = isHighQuality ? 160 : 70;
-  const particleCountFar = isHighQuality ? 100 : 30;
+  const particleCountNear = isHighQuality ? (isMobile ? 100 : 160) : 50;
+  const particleCountFar = isHighQuality ? (isMobile ? 60 : 100) : 20;
 
-  // Foreground particle layer
+  // Foreground particle layer (compact radius on mobile)
   const particlePositionsNear = useMemo(() => {
     const positions = new Float32Array(particleCountNear * 3);
     for (let i = 0; i < particleCountNear; i++) {
@@ -45,16 +48,16 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = 3.2 + Math.random() * 3.8;
+      const r = isMobile ? 1.6 + Math.random() * 2.0 : 3.2 + Math.random() * 3.8;
 
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = r * Math.cos(phi);
     }
     return positions;
-  }, [particleCountNear]);
+  }, [particleCountNear, isMobile]);
 
-  // Background deep particle layer
+  // Background deep particle layer (compact radius on mobile)
   const particlePositionsFar = useMemo(() => {
     const positions = new Float32Array(particleCountFar * 3);
     for (let i = 0; i < particleCountFar; i++) {
@@ -62,25 +65,26 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = 5.5 + Math.random() * 4.5;
+      const r = isMobile ? 2.8 + Math.random() * 2.2 : 5.5 + Math.random() * 4.5;
 
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = r * Math.cos(phi);
     }
     return positions;
-  }, [particleCountFar]);
+  }, [particleCountFar, isMobile]);
 
-  // Orbiting satellite nodes
+  // Orbiting satellite nodes (scaled down on mobile)
   const satellites = useMemo(() => {
+    const scaleFactor = isMobile ? 0.55 : 1.0;
     return isHighQuality
       ? [
-          { radius: 2.8, speed: 0.35, yOffset: 0.5, scale: 0.22 },
-          { radius: 3.4, speed: -0.28, yOffset: -0.8, scale: 0.18 },
-          { radius: 4.1, speed: 0.22, yOffset: 1.2, scale: 0.24 },
+          { radius: 2.8 * scaleFactor, speed: 0.35, yOffset: 0.3 * scaleFactor, scale: 0.22 * scaleFactor },
+          { radius: 3.4 * scaleFactor, speed: -0.28, yOffset: -0.5 * scaleFactor, scale: 0.18 * scaleFactor },
+          { radius: 4.1 * scaleFactor, speed: 0.22, yOffset: 0.8 * scaleFactor, scale: 0.24 * scaleFactor },
         ]
-      : [{ radius: 3.0, speed: 0.3, yOffset: 0.3, scale: 0.2 }];
-  }, [isHighQuality]);
+      : [{ radius: 2.5 * scaleFactor, speed: 0.3, yOffset: 0.2 * scaleFactor, scale: 0.18 * scaleFactor }];
+  }, [isHighQuality, isMobile]);
 
   const satRefs = useRef<(THREE.Mesh | null)[]>([]);
 
@@ -91,39 +95,34 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
     const pointerX = state.pointer.x;
     const pointerY = state.pointer.y;
 
-    // Smooth camera / group rotation with spring lerp
     if (groupRef.current) {
       groupRef.current.rotation.y = THREE.MathUtils.lerp(
         groupRef.current.rotation.y,
-        pointerX * 0.22 + time * 0.04,
+        pointerX * 0.18 + time * 0.04,
         0.04
       );
       groupRef.current.rotation.x = THREE.MathUtils.lerp(
         groupRef.current.rotation.x,
-        -pointerY * 0.18,
+        -pointerY * 0.15,
         0.04
       );
     }
 
-    // Geodesic core idle spin
     if (coreMeshRef.current) {
       coreMeshRef.current.rotation.x = time * 0.18;
       coreMeshRef.current.rotation.y = time * 0.25;
     }
 
-    // Inner core counter spin
     if (innerCoreRef.current) {
       innerCoreRef.current.rotation.x = time * -0.25;
       innerCoreRef.current.rotation.z = time * 0.2;
     }
 
-    // Outer torus ring spin
     if (outerRingRef.current) {
       outerRingRef.current.rotation.x = time * -0.12;
       outerRingRef.current.rotation.z = time * 0.15;
     }
 
-    // Differential depth parallax on particle layers
     if (particlesRef1.current) {
       particlesRef1.current.rotation.y = time * 0.03;
     }
@@ -131,14 +130,13 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
       particlesRef2.current.rotation.y = time * -0.015;
     }
 
-    // Satellite orbits
     satellites.forEach((sat, idx) => {
       const mesh = satRefs.current[idx];
       if (mesh) {
         const angle = time * sat.speed;
         mesh.position.x = Math.cos(angle) * sat.radius;
         mesh.position.z = Math.sin(angle) * sat.radius;
-        mesh.position.y = Math.sin(time * 0.7 + idx) * 0.35 + sat.yOffset;
+        mesh.position.y = Math.sin(time * 0.7 + idx) * 0.25 + sat.yOffset;
         mesh.rotation.x = time * 0.4;
         mesh.rotation.y = time * 0.6;
       }
@@ -147,14 +145,14 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
 
   return (
     <group ref={groupRef}>
-      {/* Studio Lighting Setup with Rim & Fresnel Highlights */}
+      {/* Studio Lighting Setup */}
       <ambientLight intensity={isDark ? 0.6 : 0.85} />
       <directionalLight position={[10, 12, 6]} intensity={isDark ? 1.4 : 1.6} color={primaryColor} />
       <pointLight position={[-12, -10, -6]} intensity={0.9} color="#4f46e5" />
       <spotLight position={[0, 15, 10]} angle={0.3} penumbra={1} intensity={0.8} color="#a78bfa" />
 
-      {/* Geodesic Core Mesh with Physical Fresnel Specular Clearcoat */}
-      <mesh ref={coreMeshRef} scale={1.35}>
+      {/* Geodesic Core Mesh - Proportional scaling on mobile */}
+      <mesh ref={coreMeshRef} scale={isMobile ? 0.75 : 1.35}>
         <icosahedronGeometry args={[1, 1]} />
         <meshPhysicalMaterial
           color={primaryColor}
@@ -169,7 +167,7 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
       </mesh>
 
       {/* Inner Solid Octahedron Core */}
-      <mesh ref={innerCoreRef} scale={0.72}>
+      <mesh ref={innerCoreRef} scale={isMobile ? 0.4 : 0.72}>
         <octahedronGeometry args={[1, 0]} />
         <meshPhysicalMaterial
           color={wireframeColor}
@@ -183,9 +181,9 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
 
       {/* Outer Torus Wireframe Ring */}
       {isHighQuality && (
-        <mesh ref={outerRingRef} scale={1.85}>
+        <mesh ref={outerRingRef} scale={isMobile ? 1.0 : 1.85}>
           <torusGeometry args={[1.5, 0.018, 8, 32]} />
-          <meshBasicMaterial color={primaryColor} wireframe transparent opacity={0.32} />
+          <meshBasicMaterial color={primaryColor} wireframe transparent opacity={0.3} />
         </mesh>
       )}
 
@@ -209,31 +207,31 @@ export function HeroScene({ isReducedMotion = false, theme = 'dark', qualityTier
         </mesh>
       ))}
 
-      {/* Foreground Particle Constellation (Near Layer) */}
+      {/* Foreground Particles (Sized down on mobile) */}
       <points ref={particlesRef1}>
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" args={[particlePositionsNear, 3]} />
         </bufferGeometry>
         <pointsMaterial
-          size={0.065}
+          size={isMobile ? 0.035 : 0.065}
           color={particleColorNear}
           transparent
-          opacity={isDark ? 0.7 : 0.5}
+          opacity={isDark ? 0.65 : 0.45}
           sizeAttenuation
         />
       </points>
 
-      {/* Background Deep Particle Constellation (Far Layer) */}
+      {/* Background Deep Particles (Sized down on mobile) */}
       {isHighQuality && (
         <points ref={particlesRef2}>
           <bufferGeometry>
             <bufferAttribute attach="attributes-position" args={[particlePositionsFar, 3]} />
           </bufferGeometry>
           <pointsMaterial
-            size={0.045}
+            size={isMobile ? 0.025 : 0.045}
             color={particleColorFar}
             transparent
-            opacity={isDark ? 0.45 : 0.3}
+            opacity={isDark ? 0.4 : 0.25}
             sizeAttenuation
           />
         </points>
