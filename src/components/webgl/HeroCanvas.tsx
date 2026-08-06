@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import { useTheme } from 'next-themes';
@@ -8,9 +8,10 @@ import { useWebGLSupport } from './useWebGLSupport';
 import { HeroScene } from './HeroScene';
 
 /**
- * Main WebGL Canvas container for the Hero section.
- * Features: low-power GPU preference, DPR capping [1, 1.5], context loss recovery,
- * tab visibility pausing, and accessibility prefers-reduced-motion fallback.
+ * Enhanced WebGL Canvas container for the Hero section.
+ * Features: adaptive quality tiering (HIGH/LOW), low-power GPU preference,
+ * DPR capping [1, 1.5], context loss recovery, tab visibility pausing, and
+ * prefers-reduced-motion accessibility support.
  */
 export function HeroCanvas() {
   const [mounted, setMounted] = useState(false);
@@ -22,6 +23,13 @@ export function HeroCanvas() {
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Detect Quality Tier based on hardwareConcurrency
+  const qualityTier = useMemo<'high' | 'low'>(() => {
+    if (typeof window === 'undefined') return 'high';
+    const concurrency = navigator.hardwareConcurrency || 4;
+    return concurrency < 4 ? 'low' : 'high';
   }, []);
 
   // Pause render loop when document is hidden (tab switching / minimized)
@@ -80,7 +88,11 @@ export function HeroCanvas() {
         frameloop={isReducedMotion ? 'never' : 'always'}
         className="w-full h-full"
       >
-        <HeroScene isReducedMotion={isReducedMotion} theme={activeTheme} />
+        <HeroScene
+          isReducedMotion={isReducedMotion}
+          theme={activeTheme}
+          qualityTier={qualityTier}
+        />
       </Canvas>
     </div>
   );
