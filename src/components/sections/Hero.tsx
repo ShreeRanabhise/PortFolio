@@ -1,15 +1,16 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, Suspense } from 'react';
 import { motion, Variants, useMotionValue, useSpring } from 'framer-motion';
 import { ArrowRight, Terminal, Cpu, CheckCircle2, Code, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { personalInfo } from '@/data/portfolioData';
+import { WebGLErrorBoundary } from '@/components/webgl/WebGLErrorBoundary';
 
-// Dynamically import WebGL HeroCanvas to avoid SSR issues
-const HeroCanvas = dynamic(() => import('@/components/webgl/HeroCanvas'), {
+// Dynamically import isolated WebGLBackground layer to prevent SSR hydration penalty
+const WebGLBackground = dynamic(() => import('@/components/webgl/WebGLBackground'), {
   ssr: false,
 });
 
@@ -71,8 +72,26 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[85vh] flex flex-col justify-between pt-28 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 bg-[#f8fafc] dark:bg-[#090b10] text-slate-900 dark:text-[#f8fafc] overflow-hidden">
-      {/* WebGL 3D Interactive Background Scene */}
-      <HeroCanvas />
+      {/* WebGL Ambient Flow Layer with Error Boundary and Suspense Fallback */}
+      <WebGLErrorBoundary
+        fallback={
+          <div
+            className="absolute inset-0 bg-gradient-to-tr from-violet-600/10 via-indigo-600/5 to-transparent pointer-events-none"
+            aria-hidden="true"
+          />
+        }
+      >
+        <Suspense
+          fallback={
+            <div
+              className="absolute inset-0 bg-gradient-to-tr from-violet-600/10 via-indigo-600/5 to-transparent pointer-events-none"
+              aria-hidden="true"
+            />
+          }
+        >
+          <WebGLBackground />
+        </Suspense>
+      </WebGLErrorBoundary>
 
       {/* Background glow blooms with GPU acceleration */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-violet-600/20 via-indigo-600/10 to-transparent dark:from-violet-600/15 dark:via-indigo-600/10 rounded-full blur-[90px] pointer-events-none transform-gpu" />
