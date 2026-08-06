@@ -61,15 +61,15 @@ export function ProjectsSection() {
           </p>
         </motion.div>
 
-        {/* ── Filter Buttons with Animated Background Pill ── */}
-        <div className="flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] max-w-2xl mx-auto">
+        {/* Category filter tabs */}
+        <div className="flex items-center justify-start sm:justify-center gap-1.5 p-1.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] max-w-2xl mx-auto overflow-x-auto no-scrollbar">
           {categories.map((cat) => {
             const isActive = selectedCategory === cat;
             return (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`relative px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 ${
+                className={`relative px-4 py-2.5 min-h-[44px] shrink-0 rounded-full text-xs font-bold transition-all duration-200 ${
                   isActive
                     ? 'text-white'
                     : 'text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white'
@@ -99,7 +99,7 @@ export function ProjectsSection() {
             onMouseLeave={() => setIsFeaturedHovered(false)}
             className="group relative rounded-3xl bg-slate-50/80 dark:bg-white/[0.02] border border-indigo-100 dark:border-white/[0.06] hover:border-indigo-400/40 dark:hover:border-violet-500/30 transition-all duration-500 shadow-sm dark:shadow-none overflow-hidden"
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-8 sm:p-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 p-5 sm:p-8 lg:p-10 items-center">
               {/* Left Column Text */}
               <div className="lg:col-span-7 space-y-6">
                 <div className="flex flex-wrap items-center gap-3">
@@ -112,44 +112,43 @@ export function ProjectsSection() {
                   </span>
                 </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight group-hover:text-indigo-600 dark:group-hover:text-violet-300 transition-colors">
-                    {featuredProject.title}
-                  </h3>
-                  <p className="text-sm text-slate-700 dark:text-stone-300 leading-relaxed font-medium">
-                    {featuredProject.shortDescription}
-                  </p>
-                </div>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
+                  {featuredProject.title}
+                </h3>
+
+                <p className="text-sm sm:text-base text-slate-600 dark:text-stone-400 leading-relaxed font-normal">
+                  {featuredProject.shortDescription}
+                </p>
 
                 {/* Key Metrics / Stats Strip */}
                 {featuredProject.stats && (
-                  <div className="grid grid-cols-3 gap-4 py-4 border-y border-indigo-100 dark:border-white/[0.06]">
+                  <div className="grid grid-cols-3 gap-3 py-3 border-y border-slate-200 dark:border-white/[0.06]">
                     {featuredProject.stats.map((m, idx) => (
                       <div key={idx}>
-                        <Counter value={m.value} className="text-lg sm:text-xl font-extrabold text-indigo-600 dark:text-violet-400 block" />
-                        <div className="text-[11px] text-slate-600 dark:text-stone-400 font-medium truncate">{m.label}</div>
+                        <Counter value={m.value} className="text-base sm:text-xl font-extrabold text-indigo-600 dark:text-violet-400 block" />
+                        <div className="text-[10px] sm:text-xs text-slate-600 dark:text-stone-400 font-medium truncate">{m.label}</div>
                       </div>
                     ))}
                   </div>
                 )}
 
-                {/* Tech Badges */}
-                <div className="flex flex-wrap gap-2">
-                  {featuredProject.techStack.map((t) => (
+                {/* Tech chips */}
+                <div className="flex flex-wrap items-center gap-2">
+                  {featuredProject.techStack.map((tech) => (
                     <span
-                      key={t}
-                      className="px-3 py-1 rounded-lg bg-indigo-50 dark:bg-white/[0.04] text-indigo-900 dark:text-stone-300 text-xs font-semibold border border-indigo-100 dark:border-transparent"
+                      key={tech}
+                      className="px-3 py-1 rounded-full text-xs font-mono font-medium bg-white dark:bg-white/[0.03] text-slate-700 dark:text-stone-300 border border-slate-200 dark:border-white/[0.06]"
                     >
-                      {t}
+                      {tech}
                     </span>
                   ))}
                 </div>
 
-                {/* CTAs */}
-                <div className="flex flex-wrap items-center gap-4 pt-2">
+                {/* Action CTAs */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
                   <Link
                     href={`/projects/${featuredProject.slug}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/25 transition-all"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[44px] rounded-md bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/25 transition-all"
                   >
                     <span>Read Full Case Study</span>
                     <ArrowRight className="w-4 h-4" />
@@ -160,7 +159,7 @@ export function ProjectsSection() {
                       href={featuredProject.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-white dark:bg-transparent border border-slate-300 dark:border-white/10 hover:border-indigo-500/40 text-slate-800 dark:text-stone-300 hover:text-slate-950 dark:hover:text-white font-semibold text-xs transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[44px] rounded-md bg-white dark:bg-transparent border border-slate-300 dark:border-white/10 hover:border-indigo-500/40 text-slate-800 dark:text-stone-300 hover:text-slate-950 dark:hover:text-white font-semibold text-xs transition-all"
                     >
                       <span>Live App</span>
                       <ExternalLink className="w-3.5 h-3.5" />

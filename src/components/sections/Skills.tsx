@@ -65,7 +65,7 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="flex flex-wrap items-center justify-center gap-1.5 max-w-4xl mx-auto p-1.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06]"
+          className="flex items-center justify-start sm:justify-center gap-1.5 max-w-4xl mx-auto p-1.5 rounded-full bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] overflow-x-auto no-scrollbar"
         >
           {skillCategories.map((catObj) => {
             const isActive = selectedCategory === catObj.category;
@@ -73,7 +73,7 @@ export function Skills() {
               <button
                 key={catObj.category}
                 onClick={() => setSelectedCategory(catObj.category)}
-                className={`relative flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-full transition-all duration-200 ${
+                className={`relative flex items-center gap-2 px-4 py-2.5 min-h-[44px] shrink-0 text-xs font-semibold rounded-full transition-all duration-200 ${
                   isActive
                     ? 'text-white'
                     : 'text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white'
@@ -108,7 +108,7 @@ export function Skills() {
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">{activeCategoryObj.category}</h3>
               </div>
               <span className="text-xs font-mono text-slate-500 dark:text-stone-500">
-                {activeCategoryObj.skills.length} core technologies
+                {activeCategoryObj.skills.length} competencies
               </span>
             </div>
 
@@ -116,8 +116,9 @@ export function Skills() {
               {activeCategoryObj.skills.map((skill) => (
                 <motion.div
                   key={skill.name}
+                  whileHover={{ y: -2 }}
                   variants={fadeUp}
-                  className="p-5 rounded-2xl bg-slate-50/70 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.06] hover:border-violet-500/30 shadow-sm dark:shadow-none transition-all duration-300 space-y-3 group hover:-translate-y-0.5"
+                  className="p-5 rounded-2xl bg-slate-50/70 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/[0.06] hover:border-violet-500/30 shadow-sm dark:shadow-none transition-all duration-300 space-y-3 group"
                 >
                   <div className="flex items-start justify-between gap-2">
                     <h4 className="text-base font-extrabold text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-300 transition-colors">
@@ -143,7 +144,7 @@ export function Skills() {
         <div className="text-center pt-4">
           <button
             onClick={() => setShowStackDrawer((prev) => !prev)}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] hover:border-violet-500/30 text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white text-xs font-semibold transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-md bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/[0.06] hover:border-violet-500/30 text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white text-xs font-semibold transition-all duration-200"
           >
             <Zap className="w-4 h-4 text-violet-600 dark:text-violet-400" />
             <span>{showStackDrawer ? 'Hide environment details' : 'What I use to build daily'}</span>

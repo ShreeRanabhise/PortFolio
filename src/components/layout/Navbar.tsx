@@ -275,7 +275,7 @@ export function Navbar() {
 
               <button
                 onClick={() => setMobileMenuOpen((prev) => !prev)}
-                className="p-2 rounded-md bg-slate-200/80 dark:bg-white/[0.03] border border-slate-300/60 dark:border-white/[0.06] text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white transition-colors duration-200"
+                className="p-2.5 rounded-md min-h-[44px] min-w-[44px] flex items-center justify-center bg-slate-200/80 dark:bg-white/[0.03] border border-slate-300/60 dark:border-white/[0.06] text-slate-700 dark:text-stone-400 hover:text-slate-950 dark:hover:text-white transition-colors duration-200"
                 aria-label="Toggle Mobile Navigation Menu"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -292,7 +292,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-x-0 top-[110px] z-30 bg-white/95 dark:bg-[#090b10]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.08] shadow-2xl p-6 xl:hidden"
+            className="fixed inset-x-0 top-[100px] z-30 bg-white/95 dark:bg-[#090b10]/95 backdrop-blur-2xl border-b border-slate-200 dark:border-white/[0.08] shadow-2xl p-6 xl:hidden"
           >
             <div className="space-y-4 max-w-md mx-auto">
               <div className="space-y-1.5">
@@ -303,7 +303,7 @@ export function Navbar() {
                       key={link.name}
                       href={link.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className={`flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
+                      className={`flex items-center justify-between p-3 min-h-[44px] rounded-md text-sm font-semibold transition-all ${
                         isActive
                           ? 'bg-violet-600 text-white'
                           : 'text-slate-700 dark:text-stone-300 hover:bg-slate-100 dark:hover:bg-white/[0.04]'
@@ -319,7 +319,7 @@ export function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-violet-600 text-white font-bold text-xs shadow-lg shadow-violet-600/25"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-md bg-violet-600 text-white font-bold text-xs shadow-lg shadow-violet-600/25 active:scale-[0.98] transition-all"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download Resume (PDF)</span>
